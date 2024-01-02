@@ -23,15 +23,15 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
 
 #### Color Reference:
 
-- --primary-color-ligth= ![#ab47bc](https://via.placeholder.com/10/ab47bc?text=+) #ab47bc;
-- --primary-color= ![#8e24aa](https://via.placeholder.com/10/8e24aa?text=+) #8e24aa;
-- --primary-color-dark= ![#6a1b9a](https://via.placeholder.com/10/6a1b9a?text=+) #6a1b9a;
-- --bkg-color= ![#f5f5f5](https://via.placeholder.com/10/f5f5f5?text=+)
+- --primary-color-ligth: ![#ab47bc](https://via.placeholder.com/10/ab47bc?text=+) #ab47bc;
+- --primary-color: ![#8e24aa](https://via.placeholder.com/10/8e24aa?text=+) #8e24aa;
+- --primary-color-dark: ![#6a1b9a](https://via.placeholder.com/10/6a1b9a?text=+) #6a1b9a;
+- --bkg-color: ![#f5f5f5](https://via.placeholder.com/10/f5f5f5?text=+)
   #f5f5f5 | ![#212121](https://via.placeholder.com/10/212121?text=+) #212121;
-- --text-color= ![#000](https://via.placeholder.com/10/000?text=+)
+- --text-color: ![#000](https://via.placeholder.com/10/000?text=+)
   #000 | ![#fff](https://via.placeholder.com/10/fff?text=+) #fff;
-- --btn-color= ![#8e24aa](https://via.placeholder.com/10/8e24aa?text=+) --primary-color;
-- --btn-text-color= ![#fff](https://via.placeholder.com/10/fff?text=+) #fff;
+- --btn-color: ![#8e24aa](https://via.placeholder.com/10/8e24aa?text=+) --primary-color;
+- --btn-text-color: ![#fff](https://via.placeholder.com/10/fff?text=+) #fff;
 
 #### Components:
 
@@ -40,8 +40,8 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
         - [ ] Logo:
             - [ ] TipewriterComponent
         - [ ] Nav:
+            - [ ] CheckButtonComponent
             - [ ] GlowButtonComponent
-            - [ ] CheckGlowButtonComponent
     - [ ] HomeComponent:
         - [ ] HeroText
         - [ ] HeroImage:
