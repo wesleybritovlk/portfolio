@@ -1,10 +1,11 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {TranslatedModule} from "./config/translated.module";
 import {AosModule} from "./config/aos.module";
 import {SwiperElementModule} from "./config/swiper-element.module";
+import {ContentModule} from "./components/content.module";
 
 @NgModule({
   declarations: [
@@ -15,10 +16,10 @@ import {SwiperElementModule} from "./config/swiper-element.module";
     TranslatedModule,
     AosModule,
     SwiperElementModule,
+    ContentModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
