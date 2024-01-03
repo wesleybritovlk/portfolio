@@ -23,7 +23,7 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
 
 #### Color Reference:
 
-- --primary-color-ligth: ![#ab47bc](https://via.placeholder.com/10/ab47bc?text=+) #ab47bc;
+- --primary-color-light: ![#b421ce](https://via.placeholder.com/10/b421ce?text=+) #b421ce;
 - --primary-color: ![#8e24aa](https://via.placeholder.com/10/8e24aa?text=+) #8e24aa;
 - --primary-color-dark: ![#6a1b9a](https://via.placeholder.com/10/6a1b9a?text=+) #6a1b9a;
 - --bkg-color: ![#f5f5f5](https://via.placeholder.com/10/f5f5f5?text=+)
