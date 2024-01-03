@@ -1,11 +1,11 @@
-import {Component, Input} from '@angular/core';
-import {commonIcon} from "../../common/styles.common";
+import {Component, EventEmitter, Input, Output} from '@angular/core'
+import {commonIcon} from '../../common/styles.common'
 
 @Component({
   selector: 'app-check-button',
   template: `
     <input class="check" type="checkbox" [checked]="check"/>
-    <label class="switch" (click)="check = !check">
+    <label class="switch" (click)="onClick()">
       <span class="swiper">
         <i [ngStyle]="commonIcon()" [ngClass]="check ? iconOff : iconOn"></i>
       </span>
@@ -21,6 +21,12 @@ import {commonIcon} from "../../common/styles.common";
 
     .check {
       display: none;
+    }
+
+    .switch:hover .swiper i,
+    .switch:focus-within .swiper i,
+    .switch:active .swiper i {
+      color: var(--primary-color);
     }
 
     @media (min-width: 820px) {
@@ -52,18 +58,19 @@ import {commonIcon} from "../../common/styles.common";
 
       .switch:hover {
         border-color: var(--primary-color);
-     }
-
-      .switch:hover .swiper i{
-        color: var(--primary-color);
       }
     }
   `]
 })
 export class CheckButtonComponent {
-  @Input() iconOn?: string;
-  @Input() iconOff?: string;
-  @Input() check: boolean = false;
+  @Input() iconOn?: string
+  @Input() iconOff?: string
+  @Input() check: boolean = false
+  @Output() isChecked: EventEmitter<boolean> = new EventEmitter()
+  protected readonly commonIcon = commonIcon
 
-  protected readonly commonIcon = commonIcon;
+  onClick() {
+    this.check = !this.check
+    this.isChecked.emit(this.check)
+  }
 }

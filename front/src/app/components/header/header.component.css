@@ -32,22 +32,30 @@ app-check-button {
 
 .nav-menu {
   display: flex;
+  flex-flow: column nowrap;
   align-items: center;
+  justify-content: center;
   margin: 0 10px;
 }
 
-.menu {
-  display: none;
+.menu-item {
+  font-size: var(--text-size);
+  padding: 12px 35px;
 }
 
 .menu-btn, .menu-item {
   cursor: pointer;
   transition: .3s ease-in-out;
   color: var(--text-color);
-  font-weight: 500;
+  font-weight: 600;
 }
 
-.menu-btn:hover, .menu-item:hover {
+.menu-item:hover, .menu-item:active, .menu-item:focus-within {
+  background: var(--primary-color-dark);
+  color: var(--primary-color-light);
+}
+
+.menu-btn:hover, .menu-btn:active, .menu-btn:focus-within, .--active {
   color: var(--primary-color);
 }
 
@@ -72,11 +80,21 @@ app-check-button {
     flex-flow: row-reverse nowrap;
   }
 
-  .menu {
-    display: inline-flex;
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 37px;
+    width: fit-content;
+    margin: 0 10px;
+    padding: 7px 10px;
+    border-radius: 25px;
+    border: 2px solid transparent;
+    transition: .3s ease-in-out;
   }
 
-  .menu-item {
-    margin: 0 20px;
+  .menu-item:hover {
+    border-color: var(--primary-color-light);
+    background: none;
   }
 }
