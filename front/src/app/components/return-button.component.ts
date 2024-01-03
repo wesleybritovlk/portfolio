@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import {Component} from '@angular/core'
 
 @Component({
   selector: 'app-return-button',
   template: `
     <div class="return-container">
-      <button [ngStyle]="styleByScroll()" (click)="onClick()" class="ri-arrow-up-fill">
-      </button>
+      <button [ngStyle]="styleByScroll()" (click)="onClick()"
+              class="ri-arrow-up-fill"></button>
     </div>
   `,
   styles: [`
@@ -32,7 +32,9 @@ import {Component} from '@angular/core';
       transition: .3s ease-in-out;
     }
 
-    button:hover {
+    button:hover,
+    button:focus-within,
+    button:active {
       color: var(--primary-color);
       border-color: var(--primary-color);
     }
@@ -51,13 +53,11 @@ import {Component} from '@angular/core';
   `]
 })
 export class ReturnButtonComponent {
-  styleByScroll() {
-    if (document.documentElement.scrollTop > 580) return {display: "block"};
-    return {display: "none"};
-  }
+  styleByScroll = (): Record<string, string> =>
+    document.documentElement.scrollTop > 580 ? {display: 'block'} : {display: 'none'}
 
   onClick() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0
+    document.documentElement.scrollTop = 0
   }
 }

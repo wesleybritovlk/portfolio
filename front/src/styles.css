@@ -10,13 +10,14 @@
 }
 
 :root {
-  --primary-color-ligth: #ab47bc;
+  --primary-color-light: #b421ce;
   --primary-color: #8e24aa;
   --primary-color-dark: #6a1b9a;
   --bkg-color: #f5f5f5;
   --text-color: #000;
   --btn-color: var(--primary-color);
   --btn-text-color: #fff;
+  --modal-color: #fff;
 
   --text-size-smaller: .67rem;
   --text-size: 1rem;
@@ -32,6 +33,8 @@
 :root.dark {
   --bkg-color: #212121;
   --text-color: #fff;
+  --modal-color: #000;
+
   background: var(--bkg-color);
   color: var(--text-color);
 }

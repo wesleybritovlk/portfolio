@@ -1,6 +1,6 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import * as AOS from "aos";
+import {NgModule} from '@angular/core'
+import {CommonModule} from '@angular/common'
+import * as AOS from 'aos'
 
 @NgModule({
   imports: [
@@ -9,7 +9,7 @@ import * as AOS from "aos";
 })
 export class AosModule {
   constructor() {
-    AOS.init();
+    AOS.init()
   }
 }
 

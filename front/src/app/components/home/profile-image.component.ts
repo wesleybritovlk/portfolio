@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {StylesCommon} from "../../common/styles.common";
+import {Component} from '@angular/core'
+import {StylesCommon} from '../../common/styles.common'
 
 @Component({
   selector: 'app-profile-image',
@@ -20,14 +20,14 @@ import {StylesCommon} from "../../common/styles.common";
   `]
 })
 export class ProfileImageComponent {
-  imgLink: string = `https://gravatar.com/userimage/186978239/9e05dd2477009eb15b0404bade0e8a65.jpeg?size=1000`;
+  imgLink: string = `https://gravatar.com/userimage/186978239/9e05dd2477009eb15b0404bade0e8a65.jpeg?size=1000`
 
   responsiveImage = (): number => {
     let size = 175
     if (StylesCommon.mediaMobile.matches) size = 250
     if (StylesCommon.mediaTablet.matches) size = 300
     if (StylesCommon.mediaLaptop.matches) size = 415
-    return size;
+    return size
   }
 
   setImageBkg(): Record<string, string> {
@@ -36,6 +36,6 @@ export class ProfileImageComponent {
       height: `${this.responsiveImage()}px`,
       backgroundImage: `url(${this.imgLink})`,
       backgroundSize: `${this.responsiveImage()}px`,
-    };
+    }
   }
 }

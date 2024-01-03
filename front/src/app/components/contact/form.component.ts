@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {commonButton} from "../../common/styles.common";
+import {Component} from '@angular/core'
+import {commonButton} from '../../common/styles.common'
 
 @Component({
   selector: 'app-form',
@@ -108,6 +108,5 @@ import {commonButton} from "../../common/styles.common";
   `]
 })
 export class FormComponent {
-
-  protected readonly commonButton = commonButton;
+  protected readonly commonButton = commonButton
 }

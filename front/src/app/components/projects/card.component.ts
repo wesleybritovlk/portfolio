@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component} from '@angular/core'
 
 @Component({
   selector: 'app-card',
@@ -65,6 +65,7 @@ import {Component} from '@angular/core';
 
     .modal-desc {
       width: 90%;
+      color: var(--text-color);
       font-size: var(--text-size-smaller);
     }
 

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {commonIcon} from "../common/styles.common";
+import {Component} from '@angular/core'
+import {commonIcon} from '../common/styles.common'
 
 @Component({
   selector: 'app-social',
@@ -87,5 +87,5 @@ import {commonIcon} from "../common/styles.common";
   `]
 })
 export class SocialComponent {
-  protected readonly commonIcon = commonIcon;
+  protected readonly commonIcon = commonIcon
 }

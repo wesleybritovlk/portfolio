@@ -1,15 +1,15 @@
 export class StylesCommon {
-  static readonly mediaMobile = matchMedia('(min-width: 360px)');
-  static readonly mediaTablet = matchMedia('(min-width: 600px)');
-  static readonly mediaLaptop = matchMedia('(min-width: 820px)');
+  static readonly mediaMobile = matchMedia('(min-width: 360px)')
+  static readonly mediaTablet = matchMedia('(min-width: 600px)')
+  static readonly mediaLaptop = matchMedia('(min-width: 820px)')
 }
 
 export const viewContainer = (): Record<string, string> => {
-  let height = '650px';
-  if (StylesCommon.mediaMobile.matches) height = '740px';
-  if (StylesCommon.mediaTablet.matches) height = '820px';
-  let media: Record<string, string> = {flexFlow: 'column-reverse nowrap', height: height};
-  if (StylesCommon.mediaLaptop.matches) media = {flexFlow: 'row nowrap', height: '780px'};
+  let height = '650px'
+  if (StylesCommon.mediaMobile.matches) height = '740px'
+  if (StylesCommon.mediaTablet.matches) height = '820px'
+  let media: Record<string, string> = {flexFlow: 'column-reverse nowrap', height: height}
+  if (StylesCommon.mediaLaptop.matches) media = {flexFlow: 'row nowrap', height: '780px'}
   return {
     display: 'flex',
     justifyContent: 'center',
@@ -17,7 +17,7 @@ export const viewContainer = (): Record<string, string> => {
     ...media,
     width: '100%',
   }
-};
+}
 
 export const flexContainer = (width?: number): Record<string, string> => {
   let media: Record<string, string> = {
@@ -88,7 +88,7 @@ export const commonButton = (disabled?: boolean, bkgColor?: string, color?: stri
 }
 
 export const commonIcon = (menuIcon?: boolean): Record<string, string> => {
-  let size: number = 23;
+  let size: number = 23
   let display: Record<string, string> = {display: 'inline-flex'}
   if (StylesCommon.mediaMobile.matches) size = 30
   if (StylesCommon.mediaTablet.matches) size = 35

@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {flexContainer} from "../../common/styles.common";
+import {Component} from '@angular/core'
+import {flexContainer} from '../../common/styles.common'
 
 @Component({
   selector: 'app-projects',
@@ -83,5 +83,5 @@ import {flexContainer} from "../../common/styles.common";
   `]
 })
 export class ProjectsComponent {
-  protected readonly flexContainer = flexContainer;
+  protected readonly flexContainer = flexContainer
 }
