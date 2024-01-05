@@ -1,25 +1,30 @@
-import { Injectable } from "@nestjs/common";
-import { Content } from "./content";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { Injectable } from '@nestjs/common';
+import { Content } from './content';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { ContentResponse } from './content.response';
+import { ContentMapper } from './content.mapper';
 
 export abstract class ContentService {
-  abstract findAll(): Promise<Content[]>;
+  abstract create(): Promise<Content>;
 
-  abstract create(content: Content): Promise<Content>;
+  abstract find(): Promise<ContentResponse>;
 }
 
 @Injectable()
 export class ContentServiceImpl implements ContentService {
   constructor(
-    @InjectRepository(Content) private repository: Repository<Content>) {
+    private mapper: ContentMapper,
+    @InjectRepository(Content) private repository: Repository<Content>,
+  ) {
   }
 
-  async create(content: Content): Promise<Content> {
-    return this.repository.save(content);
+  async create(): Promise<Content> {
+    return this.repository.save(new Content());
   }
 
-  findAll(): Promise<Content[]> {
-    return this.repository.find();
+  async find(): Promise<ContentResponse> {
+    let content = await this.repository.findOne(undefined);
+    return this.mapper.toResponse(content);
   }
 }
