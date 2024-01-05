@@ -1,7 +1,7 @@
-import { Module } from "@nestjs/common";
-import { FormModule } from "./form/form.module";
-import { ConfigModule } from "@nestjs/config";
-import { ContentModule } from "./content/content.module";
+import { Module } from '@nestjs/common';
+import { FormModule } from './form/form.module';
+import { ConfigModule } from '@nestjs/config';
+import { ContentModule } from './content/content.module';
 
 @Module({
   imports: [
@@ -9,7 +9,7 @@ import { ContentModule } from "./content/content.module";
     FormModule,
     ContentModule],
   controllers: [],
-  providers: []
+  providers: [],
 })
 export class AppModule {
 }

@@ -2,5 +2,7 @@
   "nav_home": "Início",
   "nav_about": "Sobre",
   "nav_projects": "Projetos",
-  "nav_contact": "Contato"
+  "nav_contact": "Contato",
+  "home_hello": "Olá, eu sou",
+  "home_desc": "E sou Desenvolvedor de Software"
 }

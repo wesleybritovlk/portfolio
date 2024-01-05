@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser'
 import {AppComponent} from './app.component'
+import {ContentModule} from './components/content.module'
 import {AosModule} from './config/aos.module'
 import {SwiperElementModule} from './config/swiper-element.module'
-import {ContentModule} from './components/content.module'
 
 @NgModule({
   declarations: [
@@ -11,11 +11,10 @@ import {ContentModule} from './components/content.module'
   ],
   imports: [
     BrowserModule,
+    ContentModule,
     AosModule,
     SwiperElementModule,
-    ContentModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

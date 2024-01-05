@@ -2,5 +2,7 @@
   "nav_home": "Home",
   "nav_about": "About",
   "nav_projects": "Projects",
-  "nav_contact": "Contact"
+  "nav_contact": "Contact",
+  "home_hello": "Hello, I'm",
+  "home_desc": "And I'm a Software Developer"
 }

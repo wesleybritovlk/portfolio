@@ -1,5 +1,5 @@
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core'
-import {CommonModule} from '@angular/common'
+import {CommonModule, NgOptimizedImage} from '@angular/common'
 import {SocialComponent} from './social.component'
 import {HeaderComponent} from './header/header.component'
 import {HomeComponent} from './home/home.component'
@@ -15,6 +15,8 @@ import {CardComponent} from './projects/card.component'
 import {FormComponent} from './contact/form.component'
 import {GithubStarComponent} from './github-star.component'
 import {TranslatedModule} from '../config/translated.module'
+import {ContentService} from '../services/content.service'
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -45,8 +47,11 @@ import {TranslatedModule} from '../config/translated.module'
   ],
   imports: [
     CommonModule,
-    TranslatedModule
+    HttpClientModule,
+    TranslatedModule,
+    NgOptimizedImage
   ],
+  providers: [ContentService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ContentModule {

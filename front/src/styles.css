@@ -21,7 +21,7 @@
 
   --text-size-smaller: .67rem;
   --text-size: 1rem;
-  --text-size-large: 1.2rem;
+  --text-size-large: .87rem;
   --title-size-smaller: 1rem;
   --title-size: 1.45rem;
   --title-size-large: 2.2rem;
@@ -43,7 +43,7 @@
   :root {
     --text-size-smaller: .775rem;
     --text-size: 1rem;
-    --text-size-large: 1.2rem;
+    --text-size-large: 1.17rem;
     --title-size-smaller: 1.3rem;
     --title-size: 1.5rem;
     --title-size-large: 2.3rem;
@@ -65,7 +65,7 @@
   :root {
     --text-size-smaller: .7rem;
     --text-size: 1rem;
-    --text-size-large: 1.3rem;
+    --text-size-large: 1.27rem;
     --title-size-smaller: 1.4rem;
     --title-size: 2rem;
     --title-size-large: 3.25rem;

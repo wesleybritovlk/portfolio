@@ -1,11 +1,14 @@
 import {Component} from '@angular/core'
 import {StylesCommon} from '../../common/styles.common'
+import {ContentService} from '../../services/content.service'
+import {HomeImage} from '../../models/content'
 
 @Component({
   selector: 'app-profile-image',
   template: `
     <div class="image-border">
-      <i style="border-radius: 100%" [ngStyle]="setImageBkg()" [title]="'my photo profile'"></i>
+      <img style="border-radius: 100%"
+           [ngStyle]="setImageBkg(homeImage)" [title]="setAltByLang(homeImage)">
     </div>
   `,
   styles: [`
@@ -20,7 +23,16 @@ import {StylesCommon} from '../../common/styles.common'
   `]
 })
 export class ProfileImageComponent {
-  imgLink: string = `https://gravatar.com/userimage/186978239/9e05dd2477009eb15b0404bade0e8a65.jpeg?size=1000`
+  homeImage?: HomeImage
+
+  constructor(
+    private contentService: ContentService,
+  ) {
+    this.contentService.getContent().subscribe({
+      next: data => this.homeImage = data.home_image,
+      error: error => console.error(error)
+    })
+  }
 
   responsiveImage = (): number => {
     let size = 175
@@ -30,12 +42,17 @@ export class ProfileImageComponent {
     return size
   }
 
-  setImageBkg(): Record<string, string> {
+  setImageBkg(homeImage: HomeImage | undefined): Record<string, string> {
     return {
       width: `${this.responsiveImage()}px`,
       height: `${this.responsiveImage()}px`,
-      backgroundImage: `url(${this.imgLink})`,
+      backgroundImage: `url(${homeImage?.url})`,
       backgroundSize: `${this.responsiveImage()}px`,
     }
+  }
+
+  setAltByLang(homeImage: HomeImage | undefined) {
+    let lang = document.documentElement.lang === 'en'
+    return lang ? homeImage?.alt_en : homeImage?.alt_pt
   }
 }
