@@ -115,7 +115,7 @@ classDiagram
         String email
     }
     class SocialLink {
-        int id
+        uuid id
         String name
         String url
     }
@@ -125,11 +125,11 @@ classDiagram
         List~Skill~ skills
     }
     class Skill {
-        int id
+        uuid id
         String techName
     }
     class Project {
-        int id
+        uuid id
         String title
         String repoUrl
         String webUrl
@@ -138,7 +138,7 @@ classDiagram
         String descPt
     }
     class Certificate {
-        int id
+        uuid id
         String title
         String webUrl
         String imageUrl
@@ -170,7 +170,7 @@ classDiagram
     "social": {
       "links": [
         {
-          "id": 1,
+          "id": "uuid",
           "name": "",
           "url": ""
         }
@@ -182,14 +182,14 @@ classDiagram
       "desc_pt": "",
       "skills": [
         {
-          "id": 1,
+          "id": "uuid",
           "tech_name": ""
         }
       ]
     },
     "projects": [
       {
-        "id": 1,
+        "id": "uuid",
         "title": "",
         "repo_url": "",
         "web_url": "",
@@ -200,7 +200,7 @@ classDiagram
     ],
     "certificates": [
       {
-        "id": 1,
+        "id": "uuid",
         "title": "",
         "web_url": "",
         "image_url": ""

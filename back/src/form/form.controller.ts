@@ -1,8 +1,8 @@
 import { Body, Controller, HttpStatus, Inject, Post, Res } from '@nestjs/common';
-import { FormService } from './form.service';
-import { FormRequest } from './form-request';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
+import { FormService } from './form.service';
+import { FormRequest } from './form-request';
 
 @ApiTags('Email Form Endpoint')
 @Controller('form')
@@ -11,9 +11,12 @@ export class FormController {
   }
 
   @Post()
-  @ApiResponse({ status: HttpStatus.ACCEPTED, description: 'The email has been registered and will be sent.' })
+  @ApiResponse({
+    status: HttpStatus.ACCEPTED,
+    description: 'The email has been registered and will be sent.',
+  })
   @ApiBody({
-    description: 'Form for sending email',
+    description: 'To send email form.',
     type: FormRequest,
   })
   async post(@Res() res: Response<string>, @Body() request: FormRequest) {

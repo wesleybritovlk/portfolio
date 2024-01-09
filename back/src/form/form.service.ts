@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { MailerService } from '@nestjs-modules/mailer';
 import { FormRequest } from './form-request';
+import { MailerService } from '@nestjs-modules/mailer';
 
 export abstract class FormService {
   abstract create(request: FormRequest): Promise<void>;

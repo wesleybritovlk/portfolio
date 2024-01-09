@@ -10,9 +10,9 @@ export class HomeImageMapper {
     );
 
   toResponse = (model: HomeImage): HomeImageResponse =>
-    new HomeImageResponse(
+    model ? new HomeImageResponse(
       model.url,
       model.altEN,
       model.altPT,
-    );
+    ) : undefined;
 }
