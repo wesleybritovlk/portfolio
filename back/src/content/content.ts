@@ -1,18 +1,19 @@
-import { Column, Entity, ObjectId, ObjectIdColumn } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
+import { Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn, UpdateDateColumn } from 'typeorm';
 import { HomeImage } from './home-image/home-image';
+import { Social } from './social/social';
 
 @Entity()
 export class Content {
   @ObjectIdColumn() id: ObjectId;
-  @ApiProperty()
-  @Column(type => HomeImage) homeImage: HomeImage;
+  @Column((type) => HomeImage) homeImage: HomeImage;
+  @Column((type) => Social) social: Social;
+  @CreateDateColumn() createdAt: Date;
+  @UpdateDateColumn() updatedAt: Date;
 
   constructor() {
   }
 
   /*
-  @Column() social: Social;
   @Column() about: About;
   @Column() projects: Project[];
   @Column() certificates: Certificate[];
