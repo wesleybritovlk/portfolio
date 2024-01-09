@@ -1,24 +1,29 @@
 import {Component} from '@angular/core'
 import {commonIcon} from '../common/styles.common'
+import {Social, SocialLink} from '../models/content'
+import {ContentService} from '../services/content.service'
 
 @Component({
   selector: 'app-social',
   template: `
     <div class="social-container">
       <div class="social-links">
-        <i [ngStyle]="commonIcon()" class="ri-discord-line"></i>
-        <i [ngStyle]="commonIcon()" class="ri-instagram-line"></i>
-        <i [ngStyle]="commonIcon()" class="ri-github-line"></i>
-        <i [ngStyle]="commonIcon()" class="ri-linkedin-line"></i>
+        <a target="_blank" *ngFor="let link of social?.links; trackBy: trackByItems" [href]="link.url">
+          <i [ngStyle]="commonIcon()" [ngClass]="getIconByLink(link)"></i>
+        </a>
       </div>
       <div class="social-email">
-        <label>
-          wesleymuniz20@gmail.com
-        </label>
+        <a target="_blank" [href]="'mailto:'+social?.email">
+          <label>{{ social?.email }}</label>
+        </a>
       </div>
     </div>
   `,
   styles: [`
+    a {
+      color: var(--text-color);
+    }
+
     .social-links, .social-email {
       position: relative;
       z-index: 0;
@@ -88,4 +93,15 @@ import {commonIcon} from '../common/styles.common'
 })
 export class SocialComponent {
   protected readonly commonIcon = commonIcon
+  social?: Social
+  trackByItems = (index: number, link: SocialLink): string => link.id
+  getIconByLink = (link: SocialLink) => `ri-${link.name}-line`
+
+  constructor(private contentService: ContentService) {
+    this.contentService.getContent().subscribe({
+      next: data => this.social = data.social,
+      error: error => console.error(error)
+    })
+  }
+
 }
