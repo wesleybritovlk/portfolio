@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Content } from '../content';
 import { SocialLinkRequest, SocialLinkResponse, SocialRequest, SocialResponse } from './social.dto';
 import { SocialMapper } from './social.mapper';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Content } from '../content';
 
 export abstract class SocialService {
   abstract save(request: SocialRequest): Promise<Content>
 
-  abstract createLink(request: SocialLinkRequest): Promise<Content>
-
   abstract find(): Promise<SocialResponse>
 
-  abstract findLink(id: string): Promise<SocialLinkResponse>
-
   abstract update(request: SocialRequest): Promise<Content>
+
+  abstract createLink(request: SocialLinkRequest): Promise<Content>
+
+  abstract findLink(id: string): Promise<SocialLinkResponse>
 
   abstract updateLink(id: string, request: SocialLinkRequest): Promise<Content>
 
@@ -57,8 +57,7 @@ export class SocialServiceImpl implements SocialService {
 
   async findLink(id: string): Promise<SocialLinkResponse> {
     let content = await this.findContent();
-    let link = content.social.links.find(link =>
-      link.id === id);
+    let link = content.social.links.find(link => link.id === id);
     return this.mapper.toResponseLink(link);
   }
 

@@ -58,12 +58,12 @@ p {
 
   p {
     font-size: var(--text-size-large);
-    padding: 7px;
+    padding: 17px;
   }
 
   .skills-icons {
     font-size: var(--title-size-large);
-    margin: 2%;
-    padding: 14px;
+    margin: 1.5%;
+    padding: 12px;
   }
 }

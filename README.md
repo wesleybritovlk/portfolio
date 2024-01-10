@@ -127,6 +127,8 @@ classDiagram
     class Skill {
         uuid id
         String techName
+        String altEn
+        String altPt
     }
     class Project {
         uuid id
@@ -183,7 +185,9 @@ classDiagram
       "skills": [
         {
           "id": "uuid",
-          "tech_name": ""
+          "tech_name": "",
+          "alt_en": "",
+          "alt_pt": ""
         }
       ]
     },

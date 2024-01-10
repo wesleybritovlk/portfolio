@@ -4,5 +4,7 @@
   "nav_projects": "Projects",
   "nav_contact": "Contact",
   "home_hello": "Hello, I'm",
-  "home_desc": "And I'm a Software Developer"
+  "home_desc": "And I'm a Software Developer",
+  "about_me": "About me",
+  "about_skills": "Skills"
 }

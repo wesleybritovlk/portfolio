@@ -57,7 +57,7 @@
     --text-size-large: 1.2rem;
     --title-size-smaller: 1.7rem;
     --title-size: 1.75rem;
-    --title-size-large: 3rem;
+    --title-size-large: 2.7rem;
   }
 }
 
@@ -65,9 +65,9 @@
   :root {
     --text-size-smaller: .7rem;
     --text-size: 1rem;
-    --text-size-large: 1.27rem;
+    --text-size-large: 1.2rem;
     --title-size-smaller: 1.4rem;
     --title-size: 2rem;
-    --title-size-large: 3.25rem;
+    --title-size-large: 3rem;
   }
 }

@@ -20,7 +20,7 @@ export class SocialLinkRequest {
     name: 'name',
     required: true,
     minimum: 3,
-    type: String,
+    type: 'string',
   })
   name: string;
 
@@ -36,16 +36,16 @@ export class SocialLinkRequest {
 
 export class SocialResponse {
   @ApiProperty({
-    name: 'email',
-    format: 'email',
-  })
-  email: string;
-
-  @ApiProperty({
     name: 'links',
     format: 'array',
   })
   links: SocialLinkResponse[];
+
+  @ApiProperty({
+    name: 'email',
+    format: 'email',
+  })
+  email: string;
 
   constructor(links: SocialLinkResponse[], email: string) {
     this.links = links;
