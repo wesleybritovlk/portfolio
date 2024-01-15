@@ -2,6 +2,8 @@ import { Column, CreateDateColumn, Entity, ObjectId, ObjectIdColumn, UpdateDateC
 import { HomeImage } from './home-image/home-image';
 import { Social } from './social/social';
 import { About } from './about/about';
+import { Project } from './project/project';
+import { Certificate } from './certificate/certificate';
 
 @Entity()
 export class Content {
@@ -9,6 +11,8 @@ export class Content {
   @Column((type) => HomeImage) homeImage: HomeImage;
   @Column((type) => Social) social: Social;
   @Column((type) => About) about: About;
+  @Column((type) => Project) projects: Project[];
+  @Column((type) => Certificate) certificates: Certificate[];
   @CreateDateColumn() createdAt: Date;
   @UpdateDateColumn() updatedAt: Date;
 
@@ -16,8 +20,6 @@ export class Content {
   }
 
   /*
-  @Column() projects: Project[];
-  @Column() certificates: Certificate[];
   @Column() contact: string;
   @Column() github: Github;
   */

@@ -3,7 +3,6 @@ import {BrowserModule} from '@angular/platform-browser'
 import {AppComponent} from './app.component'
 import {ContentModule} from './components/content.module'
 import {AosModule} from './config/aos.module'
-import {SwiperElementModule} from './config/swiper-element.module'
 
 @NgModule({
   declarations: [
@@ -12,8 +11,7 @@ import {SwiperElementModule} from './config/swiper-element.module'
   imports: [
     BrowserModule,
     ContentModule,
-    AosModule,
-    SwiperElementModule,
+    AosModule
   ],
   bootstrap: [AppComponent]
 })

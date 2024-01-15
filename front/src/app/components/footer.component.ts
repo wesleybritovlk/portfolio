@@ -5,7 +5,7 @@ import {Component} from '@angular/core'
   template: `
     <footer>
       <div class="footer-copy">
-        &copy; wesleybritovlk {{ Date.now() | date: 'yyyy' }}
+        &copy; wesleybritovlk {{ date | date: 'yyyy' }}
       </div>
       <app-github-star/>
     </footer>
@@ -37,5 +37,5 @@ import {Component} from '@angular/core'
   `]
 })
 export class FooterComponent {
-  protected readonly Date = Date
+  date = Date.now()
 }

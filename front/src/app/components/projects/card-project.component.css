@@ -1,0 +1,46 @@
+.project-modal {
+  position: relative;
+  border-radius: 25px;
+  height: 100%;
+  width: 100%;
+  transform: translateY(71%);
+  transition: .75s ease-in-out;
+  overflow: hidden;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  background: var(--modal-color);
+}
+
+.modal-title {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  justify-content: space-between;
+  padding: 20px;
+  font-size: var(--title-size-smaller);
+}
+
+.project-links {
+  transition: .3s ease-in-out;
+}
+
+.modal-title, .project-links, .modal-desc {
+  color: var(--text-color);
+}
+
+.project-links:hover, .project-links:focus-within, .project-links:active {
+  color: var(--primary-color);
+}
+
+.modal-desc {
+  width: 90%;
+  font-size: var(--text-size-smaller);
+}
+
+.card-container:hover .project-modal,
+.card-container:focus-within .project-modal,
+.card-container:active .project-modal {
+  border: 2px solid var(--primary-color);
+  transform: translateY(0);
+}

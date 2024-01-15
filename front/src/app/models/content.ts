@@ -2,6 +2,8 @@ export interface Content {
   home_image: HomeImage;
   social: Social;
   about: About;
+  projects: Project[];
+  certificates: Certificate[];
 }
 
 export interface HomeImage {
@@ -11,7 +13,7 @@ export interface HomeImage {
 }
 
 export interface Social {
-  links: SocialLink[]
+  links: SocialLink[];
   email: string;
 }
 
@@ -32,4 +34,24 @@ export interface Skill {
   tech_name: string
   alt_en: string
   alt_pt: string
+}
+
+export interface Project {
+  id: string
+  title: string
+  repo_url: string
+  web_url: string
+  api_url: string
+  image_url: string
+  desc_en: string
+  desc_pt: string
+}
+
+export interface Certificate {
+  id: string
+  title: string
+  web_url: string
+  image_url: string
+  desc_en: string
+  desc_pt: string
 }

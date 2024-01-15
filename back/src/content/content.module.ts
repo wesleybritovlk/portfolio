@@ -19,6 +19,14 @@ import { About, Skill } from './about/about';
 import { AboutServiceImpl } from './about/about.service';
 import { AboutMapper } from './about/about.mapper';
 import { AboutController } from './about/about.controller';
+import { Project } from './project/project';
+import { ProjectMapper } from './project/project.mapper';
+import { ProjectServiceImpl } from './project/project.service';
+import { ProjectController } from './project/project.controller';
+import { Certificate } from './certificate/certificate';
+import { CertificateServiceImpl } from './certificate/certificate.service';
+import { CertificateMapper } from './certificate/certificate.mapper';
+import { CertificateController } from './certificate/certificate.controller';
 
 @Module({
   imports: [
@@ -31,16 +39,22 @@ import { AboutController } from './about/about.controller';
     HomeImageController,
     SocialController,
     AboutController,
+    ProjectController,
+    CertificateController,
   ],
   providers: [
     { provide: 'ContentService', useClass: ContentServiceImpl },
     { provide: 'HomeImageService', useClass: HomeImageServiceImpl },
     { provide: 'SocialService', useClass: SocialServiceImpl },
     { provide: 'AboutService', useClass: AboutServiceImpl },
+    { provide: 'ProjectService', useClass: ProjectServiceImpl },
+    { provide: 'CertificateService', useClass: CertificateServiceImpl },
     ContentMapper,
     HomeImageMapper,
     SocialMapper,
     AboutMapper,
+    ProjectMapper,
+    CertificateMapper,
   ],
 })
 export class ContentModule {
@@ -51,5 +65,7 @@ export class ContentModule {
     SocialLink,
     About,
     Skill,
+    Project,
+    Certificate,
   ];
 }

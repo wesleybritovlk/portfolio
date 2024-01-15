@@ -9,7 +9,7 @@ import {About, Skill} from '../../models/content'
     <section [ngStyle]="flexContainer()">
       <h2>{{ 'about_me' | translate }}</h2>
       <p [ngStyle]="innerRowContainer()" class="about-desc">
-        {{ setDescriptionByLang(about) }}
+        {{ setDescByLang(about) }}
       </p>
       <h2>{{ 'about_skills' | translate }}</h2>
       <p [ngStyle]="innerRowContainer()" class="skills-container">
@@ -41,7 +41,7 @@ export class AboutComponent {
     return lang ? skill.alt_en : skill.alt_pt
   }
 
-  setDescriptionByLang(about: About | undefined) {
+  setDescByLang(about: About | undefined) {
     let lang = document.documentElement.lang === 'en'
     return lang ? about?.desc_en : about?.desc_pt
   }

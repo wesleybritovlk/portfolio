@@ -6,5 +6,7 @@
   "home_hello": "Hello, I'm",
   "home_desc": "And I'm a Software Developer",
   "about_me": "About me",
-  "about_skills": "Skills"
+  "about_skills": "Skills",
+  "my_projects": "My Projects",
+  "my_certs": "My Certificates"
 }

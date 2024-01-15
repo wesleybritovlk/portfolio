@@ -19,7 +19,7 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
 
 #### Libraries:
 
-    NGX-Translate, Swiper, AOS, Remix Icon, Flag-Icons, DEVICON, Github-Buttons
+    NGX-Translate, Swiper@8, AOS, Remix Icon, Flag-Icons, DEVICON, Github-Buttons
 
 #### Color Reference:
 
@@ -31,7 +31,8 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
 - --text-color: ![#000](https://via.placeholder.com/10/000?text=+)
   #000 | ![#fff](https://via.placeholder.com/10/fff?text=+) #fff;
 - --btn-color: ![#8e24aa](https://via.placeholder.com/10/8e24aa?text=+) --primary-color;
-- --btn-text-color: ![#fff](https://via.placeholder.com/10/fff?text=+) #fff;
+- --btn-text-color: ![#fff](https://via.placeholder.com/10/fff?text=+) #fff; 
+- --modal-color: ![#FFFFFFBF](https://via.placeholder.com/10/FFFFFFBF?text=+) #FFFFFFBF | ![#000000BF](https://via.placeholder.com/10/000000BF?text=+) #000000BF;
 
 #### Components:
 
@@ -136,6 +137,7 @@ classDiagram
         String repoUrl
         String webUrl
         String apiUrl
+        String imageUrl
         String descEn
         String descPt
     }
@@ -144,6 +146,8 @@ classDiagram
         String title
         String webUrl
         String imageUrl
+        String descEn
+        String descPt
     }
     class Github {
         String username
@@ -198,6 +202,7 @@ classDiagram
         "repo_url": "",
         "web_url": "",
         "api_url": "",
+        "image_url": "",
         "desc_en": "",
         "desc_pt": ""
       }
@@ -207,7 +212,9 @@ classDiagram
         "id": "uuid",
         "title": "",
         "web_url": "",
-        "image_url": ""
+        "image_url": "",
+        "desc_en": "",
+        "desc_pt": ""
       }
     ],
     "contact": "",

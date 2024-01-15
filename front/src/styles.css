@@ -17,14 +17,14 @@
   --text-color: #000;
   --btn-color: var(--primary-color);
   --btn-text-color: #fff;
-  --modal-color: #fff;
+  --modal-color: #FFFFFFBF;
 
-  --text-size-smaller: .67rem;
-  --text-size: 1rem;
+  --text-size-smaller: .5rem;
+  --text-size: .9rem;
   --text-size-large: .87rem;
-  --title-size-smaller: 1rem;
+  --title-size-smaller: .78rem;
   --title-size: 1.45rem;
-  --title-size-large: 2.2rem;
+  --title-size-large: 2.1rem;
 
   background: var(--bkg-color);
   color: var(--text-color);
@@ -33,7 +33,7 @@
 :root.dark {
   --bkg-color: #212121;
   --text-color: #fff;
-  --modal-color: #000;
+  --modal-color: #000000BF;
 
   background: var(--bkg-color);
   color: var(--text-color);
@@ -41,10 +41,10 @@
 
 @media (min-width: 360px) {
   :root {
-    --text-size-smaller: .775rem;
+    --text-size-smaller: .6rem;
     --text-size: 1rem;
     --text-size-large: 1.17rem;
-    --title-size-smaller: 1.3rem;
+    --title-size-smaller: 1rem;
     --title-size: 1.5rem;
     --title-size-large: 2.3rem;
   }
@@ -52,10 +52,10 @@
 
 @media (min-width: 600px) {
   :root {
-    --text-size-smaller: .8rem;
+    --text-size-smaller: .7rem;
     --text-size: 1rem;
     --text-size-large: 1.2rem;
-    --title-size-smaller: 1.7rem;
+    --title-size-smaller: 1.2rem;
     --title-size: 1.75rem;
     --title-size-large: 2.7rem;
   }
@@ -63,7 +63,7 @@
 
 @media (min-width: 820px) {
   :root {
-    --text-size-smaller: .7rem;
+    --text-size-smaller: .73rem;
     --text-size: 1rem;
     --text-size-large: 1.2rem;
     --title-size-smaller: 1.4rem;

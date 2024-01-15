@@ -1,0 +1,100 @@
+import { IsNotEmpty, IsString, IsUrl, MaxLength, MinLength } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+
+export class ProjectRequest {
+  @IsNotEmpty()
+  @MinLength(3)
+  @IsString()
+  @ApiProperty({
+    name: 'title',
+    required: true,
+    minimum: 3,
+    type: 'string',
+  })
+  title: string;
+
+  @IsNotEmpty()
+  @IsUrl()
+  @ApiProperty({
+    name: 'repo_url',
+    required: true,
+    format: 'uri',
+  })
+  repo_url: string;
+
+  @ApiProperty({
+    name: 'web_url',
+    required: false,
+    format: 'uri',
+  })
+  web_url: string;
+
+  @ApiProperty({
+    name: 'api_url',
+    required: false,
+    format: 'uri',
+  })
+  api_url: string;
+
+  @IsNotEmpty()
+  @IsUrl()
+  @ApiProperty({
+    name: 'image_url',
+    required: true,
+    format: 'uri',
+  })
+  image_url: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(500)
+  @ApiProperty({
+    name: 'desc_en',
+    required: true,
+    maximum: 500,
+    type: 'string',
+  })
+  desc_en: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @MaxLength(500)
+  @ApiProperty({
+    name: 'desc_pt',
+    required: true,
+    maximum: 500,
+    type: 'string',
+  })
+  desc_pt: string;
+}
+
+export class ProjectResponse {
+  id: string;
+  title: string;
+  repo_url: string;
+  web_url: string;
+  api_url: string;
+  image_url: string;
+  desc_en: string;
+  desc_pt: string;
+
+  constructor(
+    id: string,
+    title: string,
+    repo_url: string,
+    web_url: string,
+    api_url: string,
+    image_url: string,
+    desc_en: string,
+    desc_pt: string,
+  ) {
+    this.id = id;
+    this.title = title;
+    this.repo_url = repo_url;
+    this.web_url = web_url;
+    this.api_url = api_url;
+    this.image_url = image_url;
+    this.desc_en = desc_en;
+    this.desc_pt = desc_pt;
+  }
+}
