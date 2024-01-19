@@ -7,6 +7,7 @@ export class HomeImageRequest {
   @ApiProperty({
     name: 'url',
     required: true,
+    example: 'https://www.example.com/image.jpg',
     format: 'uri',
   })
   url: string;
@@ -41,6 +42,7 @@ export class HomeImageRequest {
 export class HomeImageResponse {
   @ApiProperty({
     name: 'url',
+    example: 'https://www.example.com/image.jpg',
     format: 'uri',
   })
   url: string;

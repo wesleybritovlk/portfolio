@@ -75,8 +75,8 @@ export class AboutResponse {
 
   @ApiProperty({
     name: 'skills',
-    type: 'array',
-  })
+    format: 'array',
+    })
   skills: SkillResponse[];
 
   constructor(desc_en: string, desc_pt: string, skills: SkillResponse[]) {

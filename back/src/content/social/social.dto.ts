@@ -29,6 +29,7 @@ export class SocialLinkRequest {
   @ApiProperty({
     name: 'url',
     required: true,
+    example: 'https://www.example.com/username',
     format: 'uri',
   })
   url: string;
@@ -68,6 +69,7 @@ export class SocialLinkResponse {
 
   @ApiProperty({
     name: 'url',
+    example: 'https://www.example.com/username',
     format: 'uri',
   })
   url: string;

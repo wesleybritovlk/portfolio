@@ -18,6 +18,7 @@ export class ProjectRequest {
   @ApiProperty({
     name: 'repo_url',
     required: true,
+    example: 'https://www.github.com/username/reponame',
     format: 'uri',
   })
   repo_url: string;
@@ -25,6 +26,7 @@ export class ProjectRequest {
   @ApiProperty({
     name: 'web_url',
     required: false,
+    example: 'https://www.example.com',
     format: 'uri',
   })
   web_url: string;
@@ -32,6 +34,7 @@ export class ProjectRequest {
   @ApiProperty({
     name: 'api_url',
     required: false,
+    example: 'https://www.example.com/api',
     format: 'uri',
   })
   api_url: string;
@@ -41,6 +44,7 @@ export class ProjectRequest {
   @ApiProperty({
     name: 'image_url',
     required: true,
+    example: 'https://www.example.com/image.png',
     format: 'uri',
   })
   image_url: string;
@@ -69,13 +73,56 @@ export class ProjectRequest {
 }
 
 export class ProjectResponse {
+  @ApiProperty({
+    name: 'id',
+    format: 'uuid',
+  })
   id: string;
+
+  @ApiProperty({
+    name: 'title',
+    type: 'string',
+  })
   title: string;
+
+  @ApiProperty({
+    name: 'repo_url',
+    example: 'https://www.github.com/username/reponame',
+    format: 'uri',
+  })
   repo_url: string;
+
+  @ApiProperty({
+    name: 'web_url',
+    example: 'https://www.example.com',
+    format: 'uri',
+  })
   web_url: string;
+
+  @ApiProperty({
+    name: 'api_url',
+    example: 'https://www.example.com/api',
+    format: 'uri',
+  })
   api_url: string;
+
+  @ApiProperty({
+    name: 'image_url',
+    example: 'https://www.example.com/image.png',
+    format: 'uri',
+  })
   image_url: string;
+
+  @ApiProperty({
+    name: 'desc_en',
+    type: 'string',
+  })
   desc_en: string;
+
+  @ApiProperty({
+    name: 'desc_pt',
+    type: 'string',
+  })
   desc_pt: string;
 
   constructor(

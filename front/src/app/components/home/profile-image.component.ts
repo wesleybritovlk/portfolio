@@ -15,7 +15,6 @@ import {HomeImage} from '../../models/content'
     .image-border {
       display: flex;
       justify-content: center;
-      align-Items: center;
       border: 6px solid var(--primary-color);
       border-radius: 100%;
       padding: 10px;

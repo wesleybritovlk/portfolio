@@ -18,6 +18,7 @@ export class CertificateRequest {
   @ApiProperty({
     name: 'web_url',
     required: true,
+    example: 'https://www.example.com',
     format: 'uri',
   })
   web_url: string;
@@ -27,6 +28,7 @@ export class CertificateRequest {
   @ApiProperty({
     name: 'image_url',
     required: true,
+    example: 'https://www.example.com/image.png',
     format: 'uri',
   })
   image_url: string;
@@ -67,12 +69,14 @@ export class CertificateResponse {
 
   @ApiProperty({
     name: 'web_url',
+    example: 'https://www.example.com',
     format: 'uri',
   })
   web_url: string;
 
   @ApiProperty({
     name: 'image_url',
+    example: 'https://www.example.com/image.png',
     format: 'uri',
   })
   image_url: string;
