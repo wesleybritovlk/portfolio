@@ -38,31 +38,31 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
 
 - [ ] AppComponent:
     - [ ] HeaderComponent:
-        - [ ] Logo:
-            - [ ] TipewriterComponent
+        - [X] Logo:
+            - [X] TipewriterComponent
         - [ ] Nav:
-            - [ ] CheckButtonComponent
+            - [X] CheckButtonComponent
             - [ ] GlowButtonComponent
-    - [ ] HomeComponent:
-        - [ ] HeroText
-        - [ ] HeroImage:
-            - [ ] ProfileImageComponent
-    - [ ] SocialComponent:
-        - [ ] SocialLinks
-        - [ ] SocialEmail
-    - [ ] AboutComponent:
-        - [ ] AboutDesc
-        - [ ] SkillsIcons
-    - [ ] ProjectsComponent:
-        - [ ] SwipeContainer:
-            - [ ] CardComponent
-    - [ ] ContactComponent:
-        - [ ] ContactInfo
-        - [ ] FormComponent
-    - [ ] ReturnButtonComponent
-    - [ ] FooterComponent
-        - [ ] Copyuser
-        - [ ] GithubStarComponent
+    - [X] HomeComponent:
+        - [X] HeroText
+        - [X] HeroImage:
+            - [X] ProfileImageComponent
+    - [X] SocialComponent:
+        - [X] SocialLinks
+        - [X] SocialEmail
+    - [X] AboutComponent:
+        - [X] AboutDesc
+        - [X] SkillsIcons
+    - [X] ProjectsComponent:
+        - [X] SwipeContainer:
+            - [X] CardComponent
+    - [X] ContactComponent:
+        - [X] ContactInfo
+        - [X] FormComponent
+    - [X] ReturnButtonComponent
+    - [X] FooterComponent
+        - [X] Copyuser
+        - [X] GithubStarComponent
 
 #### Images:
 
@@ -94,17 +94,17 @@ classDiagram
     Content --> About
     Content *-- Project
     Content *-- Certificate
-    Content --> Github
+    Content --> Contact
     Social *-- SocialLink
     About *-- Skill
+    Contact --> Github
     class Content {
         HomeImage homeImage
         Social social
         About about
         List~Project~ projects
         List~Certificate~ certificates
-        String contact
-        Github github
+        Contact contact
     }
     class HomeImage {
         String url
@@ -149,9 +149,17 @@ classDiagram
         String descEn
         String descPt
     }
+    class Contact {
+        String mobile
+        String waEN
+        String waPT
+        String resumeURL
+        Github github
+    }
     class Github {
         String username
         String repoName
+        String url
     }
 
     note for Form "POST method only"
@@ -217,10 +225,16 @@ classDiagram
         "desc_pt": ""
       }
     ],
-    "contact": "",
-    "github": {
-      "username": "",
-      "repo_name": ""
+    "contact": {
+      "mobile": "",
+      "wa_en": "",
+      "wa_pt": "",
+      "resume_url": "",
+      "github": {
+        "username": "",
+        "repo_name": "",
+        "url": ""
+      }
     }
   },
   "form": {

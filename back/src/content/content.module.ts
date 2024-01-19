@@ -27,6 +27,11 @@ import { Certificate } from './certificate/certificate';
 import { CertificateServiceImpl } from './certificate/certificate.service';
 import { CertificateMapper } from './certificate/certificate.mapper';
 import { CertificateController } from './certificate/certificate.controller';
+import { Contact } from './contact/contact';
+import { GitHub } from './contact/github/github';
+import { ContactMapper } from './contact/contact.mapper';
+import { ContactServiceImpl } from './contact/contact.service';
+import { ContactController } from './contact/contact.controller';
 
 @Module({
   imports: [
@@ -41,6 +46,7 @@ import { CertificateController } from './certificate/certificate.controller';
     AboutController,
     ProjectController,
     CertificateController,
+    ContactController,
   ],
   providers: [
     { provide: 'ContentService', useClass: ContentServiceImpl },
@@ -49,12 +55,14 @@ import { CertificateController } from './certificate/certificate.controller';
     { provide: 'AboutService', useClass: AboutServiceImpl },
     { provide: 'ProjectService', useClass: ProjectServiceImpl },
     { provide: 'CertificateService', useClass: CertificateServiceImpl },
+    { provide: 'ContactService', useClass: ContactServiceImpl },
     ContentMapper,
     HomeImageMapper,
     SocialMapper,
     AboutMapper,
     ProjectMapper,
     CertificateMapper,
+    ContactMapper,
   ],
 })
 export class ContentModule {
@@ -67,5 +75,7 @@ export class ContentModule {
     Skill,
     Project,
     Certificate,
+    Contact,
+    GitHub,
   ];
 }

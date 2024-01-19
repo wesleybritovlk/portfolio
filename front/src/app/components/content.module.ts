@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core'
 import {CommonModule, NgOptimizedImage} from '@angular/common'
 import {TranslatedModule} from '../config/translated.module'
-import {HttpClientModule} from '@angular/common/http'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import {SwiperAngularModule} from '../config/swiper-angular.module'
 import {SocialComponent} from './social.component'
 import {HeaderComponent} from './header/header.component'
@@ -18,6 +18,10 @@ import {CardComponent} from './projects/card.component'
 import {FormComponent} from './contact/form.component'
 import {GithubStarComponent} from './github-star.component'
 import {ContentService} from '../services/content.service'
+import {ReactiveFormsModule} from '@angular/forms'
+import {FormInterceptor} from '../services/form.interceptor'
+import {FormService} from '../services/form.service'
+import {NgxMaskModule} from '../config/ngx-mask.module'
 
 @NgModule({
   declarations: [
@@ -48,12 +52,19 @@ import {ContentService} from '../services/content.service'
   ],
   imports: [
     CommonModule,
-    SwiperAngularModule,
     HttpClientModule,
-    TranslatedModule,
     NgOptimizedImage,
+    ReactiveFormsModule,
+    TranslatedModule,
+    SwiperAngularModule,
+    NgxMaskModule
   ],
-  providers: [ContentService],
+  providers: [
+    ContentService,
+    FormService,
+    {provide: HTTP_INTERCEPTORS, useClass: FormInterceptor, multi: true},
+  ],
 })
 export class ContentModule {
 }
+

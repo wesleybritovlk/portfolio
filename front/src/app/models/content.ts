@@ -4,6 +4,7 @@ export interface Content {
   about: About;
   projects: Project[];
   certificates: Certificate[];
+  contact: Contact;
 }
 
 export interface HomeImage {
@@ -54,4 +55,18 @@ export interface Certificate {
   image_url: string
   desc_en: string
   desc_pt: string
+}
+
+export interface Contact {
+  mobile: string
+  wa_en: string
+  wa_pt: string
+  resume_url: string
+  github: GitHub
+}
+
+export interface GitHub {
+  username: string
+  repo_name: string
+  url: string
 }

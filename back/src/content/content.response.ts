@@ -4,6 +4,7 @@ import { SocialResponse } from './social/social.dto';
 import { AboutResponse } from './about/about.dto';
 import { ProjectResponse } from './project/project.dto';
 import { CertificateResponse } from './certificate/certificate.dto';
+import { ContactResponse } from './contact/contact.dto';
 
 export class ContentResponse {
   @ApiProperty({
@@ -46,17 +47,20 @@ export class ContentResponse {
   })
   certificates: CertificateResponse[];
 
-  constructor(
-    home_image: HomeImageResponse,
-    social: SocialResponse,
-    about: AboutResponse,
-    projects: ProjectResponse[],
-    certificates: CertificateResponse[],
-  ) {
+  @ApiProperty({
+    name: 'contact',
+    required: false,
+    format: 'object',
+    type: ContactResponse,
+  })
+  contact: ContactResponse;
+
+  constructor(home_image: HomeImageResponse, social: SocialResponse, about: AboutResponse, projects: ProjectResponse[], certificates: CertificateResponse[], contact: ContactResponse) {
     this.home_image = home_image;
     this.social = social;
     this.about = about;
     this.projects = projects;
     this.certificates = certificates;
+    this.contact = contact;
   }
 }

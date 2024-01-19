@@ -6,6 +6,7 @@ import { SocialMapper } from './social/social.mapper';
 import { AboutMapper } from './about/about.mapper';
 import { ProjectMapper } from './project/project.mapper';
 import { CertificateMapper } from './certificate/certificate.mapper';
+import { ContactMapper } from './contact/contact.mapper';
 
 export class ContentMapper {
   constructor(
@@ -14,6 +15,7 @@ export class ContentMapper {
     @Inject(AboutMapper) private aboutMapper: AboutMapper,
     @Inject(ProjectMapper) private projectMapper: ProjectMapper,
     @Inject(CertificateMapper) private certificateMapper: CertificateMapper,
+    @Inject(ContactMapper) private contactMapper: ContactMapper,
   ) {
   }
 
@@ -24,5 +26,6 @@ export class ContentMapper {
       model.about ? this.aboutMapper.toResponse(model.about) : undefined,
       model.projects ? model.projects.map(this.projectMapper.toResponse) : undefined,
       model.certificates ? model.certificates.map(this.certificateMapper.toResponse) : undefined,
+      model.contact ? this.contactMapper.toResponse(model.contact) : undefined,
     ) : undefined;
 }

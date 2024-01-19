@@ -4,9 +4,7 @@ import {Content} from '../models/content'
 import {Observable} from 'rxjs'
 import {environment} from '../../environments/environment'
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ContentService {
   contentUrl = `${environment.apiUrl}/content`
 
