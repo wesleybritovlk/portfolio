@@ -1,112 +1,112 @@
 import {Component} from '@angular/core'
 import {commonButton} from '../../common/styles.common'
+import {ContentService} from '../../services/content.service'
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
+import {FormService} from '../../services/form.service'
 
 @Component({
   selector: 'app-form',
   template: `
-    <form>
-      <label>First name:<span>*</span></label>
-      <input>
-      <label>Last name:</label>
-      <input>
-      <label>Email:<span>*</span></label>
-      <input>
-      <label>Message:</label>
-      <textarea></textarea>
-      <div class="form-button">
-        <button [ngStyle]="commonButton(true, '#FF000041')" class="ri-close-line"></button>
-        <button [ngStyle]="commonButton()" class="ri-file-download-line"></button>
+    <form class="form" [formGroup]="formEmail" (ngSubmit)="onSubmit(formEmail)">
+      <div class="form-field">
+        <label class="label">{{ 'form_first-name' | translate }}:<span class="required">*</span></label>
+        <input class="input" type="text" formControlName="firstName"
+               [class.invalid]="setRequired(formEmail, 'firstName')">
+        <span class="error" *ngIf="setRequired(formEmail, 'firstName')">
+          {{ 'form_required-name' | translate }}
+        </span>
       </div>
-    </form>
-  `,
-  styles: [`
-    form {
-      display: flex;
-      flex-flow: column nowrap;
-      width: 215px;
-      height: 100%;
-      padding: 10px;
-    }
-
-    label {
-      font-size: var(--text-size);
-      margin: 5px 0;
-    }
-
-    span {
-      color: red
-    }
-
-    input, textarea {
-      border-radius: 10px;
-      font-size: var(--text-size);
-      padding: 5px;
-      height: 1.5rem;
-      min-width: 100%;
-      max-width: 100%;
-    }
-
-    textarea {
-      min-height: 125px;
-      height: 125px;
-      max-height: 125px;
-    }
-
-    button {
-      font-size: var(--text-size-large);
-      margin-right: 5px;
-      margin-top: 5px;
-    }
-
-    @media (min-width: 360px) {
-      form {
-        width: 250px;
-        padding-bottom: 20px;
-      }
-
-      textarea {
-        min-height: 150px;
-        height: 150px;
-        max-height: 150px;
-      }
-    }
-
-    @media (min-width: 600px) {
-      form {
-        width: 350px;
-        padding-bottom: 25px;
-      }
-
-      input {
-        height: 1.75rem;
-      }
-
-      textarea {
-        min-height: 160px;
-        height: 160px;
-        max-height: 160px;
-      }
-    }
-
-    @media (min-width: 820px) {
-      form {
-        width: 400px;
-        padding-bottom: 30px;
-      }
-
-      input {
-        height: 2rem;
-      }
-
-      textarea {
-        min-height: 180px;
-        height: 180px;
-        max-height: 180px;
-        padding: 10px;
-      }
-    }
-  `]
+      <div class="form-field">
+        <label class="label">{{ 'form_last-name' | translate }}:</label>
+        <input class="input" type="text" formControlName="lastName">
+      </div>
+      <div class="form-field">
+        <label class="label">{{ 'form_email' | translate }}:<span class="required">*</span></label>
+        <input class="input" type="email" formControlName="email"
+               [class.invalid]="setRequired(formEmail, 'email')">
+        <span class="error" *ngIf="setRequired(formEmail, 'email')">
+          {{ 'form_required-email' | translate }}
+        </span>
+      </div>
+      <div class="form-field">
+        <label class="label">{{ 'form_message' | translate }}:</label>
+        <textarea class="textarea" formControlName="message"></textarea>
+      </div>
+      <div class="form-field">
+        <button class="button" type="submit" [disabled]="formEmail.invalid"
+                [ngStyle]="commonButton(formEmail.invalid, setColorByState(formEmail.valid, send))">
+          <i *ngIf="formEmail.valid && isLoading" class="button-icon ri-loader-4-line --loading"></i>
+          <i *ngIf="formEmail.valid && !isLoading" class="button-icon ri-send-plane-fill"></i>
+          <i *ngIf="formEmail.invalid && !send" class="button-icon ri-close-line"></i>
+          <i *ngIf="formEmail.invalid && send" class="button-icon ri-check-line"></i>
+        </button>
+        <button [ngStyle]="commonButton()" class="button" (click)="openResume(resume)">
+          <i class="button-icon ri-file-download-line"></i>
+        </button>
+      </div>
+    </form>`,
+  styleUrls: ['form.component.css']
 })
 export class FormComponent {
   protected readonly commonButton = commonButton
+  formEmail = this.fb.nonNullable.group({
+    firstName: ['', [Validators.required, Validators.minLength(3)]],
+    lastName: ['', Validators.max(50)],
+    email: ['', [Validators.required, Validators.pattern(/(^[\w.]{3,50})(@)(\w{2,30})(\.\w{2,10}){1,2}$/)]],
+    message: ['', Validators.max(500)],
+  })
+  isLoading: boolean = false
+  send: boolean = false
+  resume?: string
+
+  constructor(
+    private fb: FormBuilder,
+    private formService: FormService,
+    private contentService: ContentService,
+  ) {
+    this.contentService.getContent().subscribe({
+      next: data => this.resume = data.contact.resume_url,
+      error: error => console.error(error)
+    })
+    this.formService.isSending.subscribe({
+      next: data => this.isLoading = data,
+      error: error => console.error(error)
+    })
+  }
+
+  onSubmit(formEmail: FormGroup) {
+    if (formEmail.valid) {
+      this.formService.postForm({
+        first_name: formEmail.value.firstName,
+        last_name: formEmail.value.lastName,
+        email: formEmail.value.email,
+        message: formEmail.value.message,
+      }).subscribe({
+        error: async err => {
+          if (err.status !== 202) console.error(err)
+          else {
+            formEmail.reset()
+            await this.toggleSend()
+            await this.toggleSend()
+          }
+        }
+      })
+    }
+  }
+
+  toggleSend = () => new Promise((resolve) => {
+    this.send = !this.send
+    setTimeout(resolve, 2000)
+  })
+
+  setRequired = (formEmail: FormGroup, formControlName: string) => formEmail.get(formControlName)?.invalid &&
+    (formEmail.get(formControlName)?.dirty || formEmail.get(formControlName)?.touched)
+
+  setColorByState = (valid: boolean, send: boolean) => {
+    if (!valid && !send) return '#FF000041'
+    if (!valid && send) return '#22FF0072'
+    return undefined
+  }
+
+  openResume = (resume: string | undefined) => open(resume, '_blank')
 }
