@@ -7,7 +7,7 @@ import {BehaviorSubject, Observable} from 'rxjs'
 @Injectable()
 export class FormService {
   private formUrl = `${environment.apiUrl}/form`
-  public isSending: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  public loader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
   constructor(private http: HttpClient) {
   }

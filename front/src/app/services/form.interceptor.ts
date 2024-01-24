@@ -11,9 +11,9 @@ export class FormInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    this.service.isSending.next(true)
+    this.service.loader.next(true)
     return next.handle(req).pipe(
-      finalize(() => this.service.isSending.next(false))
+      finalize(() => this.service.loader.next(false))
     )
   }
 }
