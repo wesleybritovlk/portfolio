@@ -1,23 +1,25 @@
-import {Component, EventEmitter, Output} from '@angular/core'
+import {Component, EventEmitter, HostListener, Output} from '@angular/core'
 import {commonIcon, StylesCommon} from '../../common/styles.common'
 import {TranslateService} from '@ngx-translate/core'
 
 @Component({
   selector: 'app-header',
   template: `
-    <header>
-      <h1 (click)="onClickPage('home')">Wesley<span><app-typewriter/></span></h1>
-      <nav>
+    <header class="header">
+      <h1 class="header-title" (click)="onClickPage('home')">Wesley<span><app-typewriter/></span></h1>
+      <nav class="header-nav">
         <div class="nav-states">
-          <app-check-button iconOn="ri-moon-clear-fill" iconOff="ri-sun-fill"
+          <app-check-button class="states-btn" iconOn="ri-moon-clear-fill" iconOff="ri-sun-fill"
                             (isChecked)="onChangeTheme()" [check]="setCurrentTheme()"/>
-          <app-check-button iconOn="fi fi-br" iconOff="fi fi-us"
+          <app-check-button class="states-btn" iconOn="fi fi-br" iconOff="fi fi-us"
                             (isChecked)="onChangeLang($event)" [check]="setCurrentLang()"/>
         </div>
-        <div class="nav-menu">
-          <i [ngStyle]="commonIcon(true)" class="menu-btn" (click)="activeBurger = !activeBurger"
-             [ngClass]="activeBurger?'ri-close-fill --active':'ri-menu-fill'"></i>
-          <ul class="menu" [ngStyle]="setBurgerStyle()">
+        <div class="nav-menu" [class.--active]="onActiveMenu(activeMenu)">
+          <div class="menu-btn" [ngStyle]="commonIcon(true)" (click)="activeMenu = !activeMenu">
+            <i *ngIf="activeMenu" class="ri-close-fill"></i>
+            <i *ngIf="!activeMenu" class="ri-menu-fill"></i>
+          </div>
+          <ul class="menu">
             <li class="menu-item" (click)="onClickPage('home')">{{ 'nav_home' | translate }}</li>
             <li class="menu-item" (click)="onClickPage('about')">{{ 'nav_about' | translate }}</li>
             <li class="menu-item" (click)="onClickPage('projects')">{{ 'nav_projects' | translate }}</li>
@@ -27,12 +29,60 @@ import {TranslateService} from '@ngx-translate/core'
       </nav>
     </header>
   `,
-  styleUrls: [`header.component.css`]
+  styleUrls: [`header.component.css`],
+  styles: [`@media (min-width: 360px) {
+    .header {
+      padding: 0 .7rem;
+    }
+  }`, `@media (min-width: 600px) {
+    .header {
+      padding: 0 1rem;
+    }
+  }`, `@media (min-width: 820px) {
+    .header {
+      padding: 0 1.5rem;
+
+      .header-nav {
+        flex-flow: row-reverse nowrap;
+
+        .nav-menu .menu-btn {
+          display: none;
+        }
+
+        .nav-menu .menu {
+          display: inline-flex;
+          position: relative;
+          width: 100%;
+          top: 0;
+          background: transparent;
+
+          .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 37px;
+            width: fit-content;
+            margin: 0 10px;
+            padding: 7px 10px;
+            border-radius: 25px;
+            border: 2px solid transparent;
+
+            &:hover {
+              border-color: var(--primary-color-light);
+              color: var(--primary-color-light);
+              box-shadow: 1px 2px 10px 0 var(--primary-color);
+              background: none;
+            }
+          }
+        }
+      }
+    }
+  }`]
 })
 export class HeaderComponent {
   protected readonly commonIcon = commonIcon
   @Output() pageTarget: EventEmitter<string> = new EventEmitter()
-  activeBurger: boolean = false
+  activeMenu: boolean = false
 
   constructor(private translate: TranslateService) {
     this.setCurrentTheme()
@@ -77,22 +127,6 @@ export class HeaderComponent {
     localStorage.setItem('theme', theme)
   }
 
-  setBurgerStyle(): Record<string, string> {
-    if (StylesCommon.mediaLaptop.matches) return {display: 'inline-flex'}
-    return this.activeBurger ? {
-      display: 'block',
-      position: 'absolute',
-      width: '47%',
-      height: 'fit-content',
-      top: '55px',
-      right: '0',
-      padding: '10px 0',
-      background: 'var(--modal-color)',
-      borderRadius: '5px',
-      transition: '.5s ease-in-out',
-      zIndex: '1000',
-      overflow: 'hidden',
-      alignItems: 'start'
-    } : {display: 'none'}
-  }
+  onActiveMenu = (activeMenu: boolean) =>
+    StylesCommon.mediaLarge.matches ? true : activeMenu
 }

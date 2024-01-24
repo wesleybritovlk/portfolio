@@ -1,4 +1,4 @@
-header {
+.header {
   z-index: 9;
   position: fixed;
   display: flex;
@@ -8,93 +8,79 @@ header {
   width: 100%;
   height: 60px;
   background: var(--bkg-color);
-}
 
-h1 {
-  cursor: pointer;
-  font-size: var(--title-size);
-  color: var(--text-color);
-}
-
-nav {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-}
-
-.nav-states {
-  display: inline-flex;
-}
-
-app-check-button {
-  margin: 0 3px;
-}
-
-.nav-menu {
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center;
-  margin: 0 10px;
-}
-
-.menu-item {
-  font-size: var(--text-size);
-  padding: 12px 35px;
-}
-
-.menu-btn, .menu-item {
-  cursor: pointer;
-  transition: .3s ease-in-out;
-  color: var(--text-color);
-  font-weight: 600;
-}
-
-.menu-item:hover, .menu-item:active, .menu-item:focus-within {
-  background: var(--primary-color-dark);
-  color: var(--primary-color-light);
-}
-
-.menu-btn:hover, .menu-btn:active, .menu-btn:focus-within, .--active {
-  color: var(--primary-color);
-}
-
-@media (min-width: 360px) {
-  header {
-    padding: 0 .7rem;
-  }
-}
-
-@media (min-width: 600px) {
-  header {
-    padding: 0 1rem;
-  }
-}
-
-@media (min-width: 820px) {
-  header {
-    padding: 0 1.5rem;
+  .header-title {
+    cursor: pointer;
+    font-size: var(--title-size);
+    color: var(--text-color);
   }
 
-  nav {
-    flex-flow: row-reverse nowrap;
-  }
-
-  .menu-item {
+  .header-nav {
     display: flex;
+    flex-flow: row nowrap;
     align-items: center;
-    justify-content: center;
-    height: 37px;
-    width: fit-content;
-    margin: 0 10px;
-    padding: 7px 10px;
-    border-radius: 25px;
-    border: 2px solid transparent;
-    transition: .3s ease-in-out;
-  }
 
-  .menu-item:hover {
-    border-color: var(--primary-color-light);
-    background: none;
+    .nav-states {
+      display: inline-flex;
+
+      .states-btn {
+        margin: 0 3px;
+      }
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+
+      .menu-btn, .menu .menu-item {
+        cursor: pointer;
+        transition: .3s ease-in-out;
+        color: var(--text-color);
+        font-weight: 600;
+      }
+
+      .menu-btn:hover, .menu-btn:active, .menu-btn:focus-within, &.--active .menu-btn {
+        color: var(--primary-color);
+      }
+
+      .menu {
+        display: block;
+        position: absolute;
+        width: 47%;
+        height: fit-content;
+        top: 55px;
+        right: 0;
+        padding: 10px 0;
+        background: var(--modal-color);
+        border-radius: 5px;
+        align-items: start;
+        overflow: hidden;
+        visibility: hidden;
+        transition: visibility .6s;
+        will-change: visibility;
+
+        .menu-item {
+          font-size: var(--text-size);
+          padding: 12px 35px;
+
+          &:hover, &:focus-within {
+            background: var(--primary-color-dark);
+            color: var(--btn-text-color);
+          }
+
+          &:active {
+            color: var(--primary-color-light);
+          }
+        }
+      }
+
+      &.--active .menu {
+        visibility: visible;
+        will-change: visibility;
+      }
+    }
   }
 }

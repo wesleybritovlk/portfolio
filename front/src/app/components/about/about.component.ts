@@ -1,36 +1,52 @@
-import {Component} from '@angular/core'
+import {Component, OnDestroy, OnInit} from '@angular/core'
 import {flexContainer, innerRowContainer} from '../../common/styles.common'
 import {ContentService} from '../../services/content.service'
 import {About, Skill} from '../../models/content'
+import {Subscription} from 'rxjs'
 
 @Component({
   selector: 'app-about',
   template: `
     <section [ngStyle]="flexContainer()">
-      <h2>{{ 'about_me' | translate }}</h2>
-      <p [ngStyle]="innerRowContainer()" class="about-desc">
+      <h2 class="about-title">{{ 'about_me' | translate }}</h2>
+      <p class="about-container" [ngStyle]="innerRowContainer()">
         {{ setDescByLang(about) }}
       </p>
-      <h2>{{ 'about_skills' | translate }}</h2>
-      <p [ngStyle]="innerRowContainer()" class="skills-container">
-        <i *ngFor="let skill of about?.skills; trackBy: trackByItems"
-           class="skills-icons" [ngClass]="setIconBySkill(skill)" [title]="setAltByLang(skill)"></i>
+      <h2 class="about-title">{{ 'about_skills' | translate }}</h2>
+      <p class="about-container skills-container" [ngStyle]="innerRowContainer()">
+        <i class="skills-icons" *ngFor="let skill of about?.skills; trackBy: trackByItems"
+           [ngClass]="setIconBySkill(skill)" [title]="setAltByLang(skill)"></i>
       </p>
     </section>
   `,
-  styleUrls: [`about.component.css`]
+  styleUrls: [`about.component.css`],
+  styles: [`@media (min-width: 600px) {
+    .skills-container .skills-icons {
+      font-size: var(--title-size-large);
+      margin: 2%;
+      padding: 10px;
+    }
+  }`, `@media (min-width: 820px) {
+    .about-title {
+      margin: 20px 5px;
+    }
+
+    .about-container {
+      padding: 17px;
+    }
+
+    .skills-container .skills-icons {
+      font-size: var(--title-size-large);
+      margin: 1.2%;
+      padding: 10px;
+    }
+  }`]
 })
-export class AboutComponent {
+export class AboutComponent implements OnInit, OnDestroy {
   protected readonly flexContainer = flexContainer
   protected readonly innerRowContainer = innerRowContainer
   about?: About
-
-  constructor(private contentService: ContentService) {
-    this.contentService.getContent().subscribe({
-      next: data => this.about = data.about,
-      error: error => console.error(error)
-    })
-  }
+  aboutSub?: Subscription
 
   trackByItems = (index: number, skill: Skill): string => skill.id
 
@@ -44,5 +60,19 @@ export class AboutComponent {
   setDescByLang(about: About | undefined) {
     let lang = document.documentElement.lang === 'en'
     return lang ? about?.desc_en : about?.desc_pt
+  }
+
+  constructor(private contentService: ContentService) {
+  }
+
+  ngOnInit(): void {
+    this.aboutSub = this.contentService.getContent().subscribe({
+      next: data => this.about = data.about,
+      error: error => console.error(error)
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.aboutSub?.unsubscribe()
   }
 }

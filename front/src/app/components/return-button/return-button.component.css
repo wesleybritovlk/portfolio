@@ -1,0 +1,29 @@
+.return-container {
+  z-index: 1;
+  position: fixed;
+  display: inline-flex;
+  justify-content: flex-end;
+  height: fit-content;
+  width: 94%;
+
+  .return-btn {
+    display: none;
+    cursor: pointer;
+    position: relative;
+    color: var(--text-color);
+    background: var(--bkg-color);
+    font-size: var(--text-size-large);
+    border: 2px solid var(--text-color);
+    border-radius: 10px;
+    padding: 8px;
+    bottom: 50rem;
+    transition: .3s ease-in-out;
+
+    &:hover,
+    &:focus-within,
+    &:active {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+  }
+}

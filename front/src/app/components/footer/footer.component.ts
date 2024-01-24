@@ -3,15 +3,15 @@ import {Component} from '@angular/core'
 @Component({
   selector: 'app-footer',
   template: `
-    <footer>
+    <footer class="footer">
       <div class="footer-copy">
-        &copy; wesleybritovlk {{ date | date: 'yyyy' }}
+        &copy;wesleybritovlk {{ date | date: 'yyyy' }}
       </div>
       <app-github-star/>
     </footer>
   `,
   styles: [`
-    footer {
+    .footer {
       position: absolute;
       width: 100%;
       display: flex;
@@ -23,14 +23,14 @@ import {Component} from '@angular/core'
       font-size: var(--text-size-smaller);
       font-weight: 600;
       padding: 10px;
-    }
 
-    .footer-copy {
-      margin: 5px;
+      .footer-copy {
+        margin: 5px;
+      }
     }
 
     @media (min-width: 820px) {
-      footer {
+      .footer {
         flex-flow: row nowrap;
       }
     }

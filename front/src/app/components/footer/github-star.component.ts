@@ -1,6 +1,7 @@
-import {Component} from '@angular/core'
-import {GitHub} from '../models/content'
-import {ContentService} from '../services/content.service'
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {GitHub} from '../../models/content'
+import {ContentService} from '../../services/content.service'
+import {Subscription} from 'rxjs'
 
 @Component({
   selector: 'app-github-star',
@@ -16,15 +17,22 @@ import {ContentService} from '../services/content.service'
     }
   `]
 })
-export class GithubStarComponent {
+export class GithubStarComponent implements OnInit, OnDestroy {
   github?: GitHub
+  githubSub?: Subscription
+  setArialLabel = (github: GitHub | undefined): string => `Star ${github?.username}/${github?.repo_name} on GitHub`
 
   constructor(private contentService: ContentService) {
-    this.contentService.getContent().subscribe({
+  }
+
+  ngOnInit(): void {
+    this.githubSub = this.contentService.getContent().subscribe({
       next: data => this.github = data.contact.github,
       error: error => console.error(error)
     })
   }
 
-  setArialLabel = (github: GitHub | undefined): string => `Star ${github?.username}/${github?.repo_name} on GitHub`
+  ngOnDestroy(): void {
+    this.githubSub?.unsubscribe()
+  }
 }

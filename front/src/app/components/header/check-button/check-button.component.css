@@ -1,0 +1,16 @@
+.check {
+  display: none;
+}
+
+.switch .swiper i {
+  cursor: pointer;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color .5s ease-in-out;
+}
+
+.switch:hover .swiper i,
+.switch:focus-within .swiper i,
+.switch:active .swiper i {
+  color: var(--primary-color);
+}

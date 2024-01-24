@@ -1,13 +1,14 @@
-import {Component} from '@angular/core'
+import {Component, OnDestroy, OnInit} from '@angular/core'
 import {flexContainer} from '../../common/styles.common'
 import {Contact} from '../../models/content'
 import {ContentService} from '../../services/content.service'
+import {Subscription} from 'rxjs'
 
 @Component({
   selector: 'app-contact',
   template: `
     <section [ngStyle]="flexContainer()">
-      <h2>{{ 'contact_me' | translate }}</h2>
+      <h2 class="contact-title">{{ 'contact_me' | translate }}</h2>
       <div class="contact-container">
         <div class="contact-number">
           <a target="_blank" [href]="setUrlByLang(contact)">
@@ -20,21 +21,57 @@ import {ContentService} from '../../services/content.service'
       </div>
     </section>
   `,
-  styleUrls: ['contact.component.css']
+  styleUrls: ['contact.component.css'],
+  styles: [
+    `@media (min-width: 820px) {
+      .contact-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+
+        .contact-number, .contact-or {
+          font-size: var(--text-size);
+          font-weight: 525;
+          margin-top: 10px;
+        }
+      }
+    }`,
+    `@media (min-width: 920px) {
+      .contact-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-around;
+
+        .contact-number, .contact-or {
+          font-size: var(--title-size-smaller);
+          font-weight: 500;
+          margin: 0;
+        }
+      }
+    }`
+  ]
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit, OnDestroy {
   protected readonly flexContainer = flexContainer
   contact?: Contact
+  contactSub?: Subscription
+
+  setUrlByLang(contact?: Contact) {
+    let lang = document.documentElement.lang === 'en'
+    return lang ? contact?.wa_en ?? '' : contact?.wa_pt ?? ''
+  }
 
   constructor(private contentService: ContentService) {
-    this.contentService.getContent().subscribe({
+  }
+
+  ngOnInit(): void {
+    this.contactSub = this.contentService.getContent().subscribe({
       next: (content) => this.contact = content.contact,
       error: error => console.error(error)
     })
   }
 
-  setUrlByLang(contact: Contact | undefined) {
-    let lang = document.documentElement.lang === 'en'
-    return lang ? contact?.wa_en ?? '' : contact?.wa_pt ?? ''
+  ngOnDestroy(): void {
+    this.contactSub?.unsubscribe()
   }
 }

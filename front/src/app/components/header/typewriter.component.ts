@@ -14,6 +14,7 @@ import {Component, OnInit} from '@angular/core'
       letter-spacing: 1px;
       text-align: center;
       animation: blink-cursor .75s infinite step-end;
+      will-change: animation;
     }
 
     @keyframes blink-cursor {
@@ -47,12 +48,12 @@ export class TypewriterComponent implements OnInit {
     await this.delete(text, timeout)
   }
 
-  async typewriterRepeater(texts: string[]) {
+  typewriterRepeater = async (texts: string[]) => {
     for (const text of texts) await this.typewriter(text, 750)
     await this.typewriterRepeater(texts)
   }
 
-  ngOnInit(): void {
-    this.typewriterRepeater(['Brito', 'VLK'])
+  async ngOnInit() {
+    await this.typewriterRepeater(['Brito', 'VLK'])
   }
 }

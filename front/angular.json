@@ -25,8 +25,11 @@
               "src/assets"
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css",
+              "src/assets/css/small.css",
+              "src/assets/css/medium.css",
+              "src/assets/css/large.css",
+              "src/assets/css/extra-large.css",
               "node_modules/remixicon/fonts/remixicon.css",
               "node_modules/flag-icons/css/flag-icons.min.css",
               "node_modules/devicon/devicon.min.css",
@@ -156,7 +159,6 @@
   },
   "cli": {
     "schematicCollections": [
-      "@cypress/schematic",
       "@schematics/angular"
     ]
   }

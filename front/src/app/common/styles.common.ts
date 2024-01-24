@@ -1,15 +1,16 @@
 export class StylesCommon {
-  static readonly mediaMobile = matchMedia('(min-width: 360px)')
-  static readonly mediaTablet = matchMedia('(min-width: 600px)')
-  static readonly mediaLaptop = matchMedia('(min-width: 820px)')
+  static readonly mediaSmall = matchMedia('(min-width: 360px)')
+  static readonly mediaMedium = matchMedia('(min-width: 600px)')
+  static readonly mediaLarge = matchMedia('(min-width: 820px)')
+  static readonly mediaExtraLarge = matchMedia('(min-width: 1340px)')
 }
 
 export const viewContainer = (): Record<string, string> => {
   let height = '650px'
-  if (StylesCommon.mediaMobile.matches) height = '740px'
-  if (StylesCommon.mediaTablet.matches) height = '820px'
+  if (StylesCommon.mediaSmall.matches) height = '740px'
+  if (StylesCommon.mediaMedium.matches) height = '820px'
   let media: Record<string, string> = {flexFlow: 'column-reverse nowrap', height: height}
-  if (StylesCommon.mediaLaptop.matches) media = {flexFlow: 'row nowrap', height: '780px'}
+  if (StylesCommon.mediaLarge.matches) media = {flexFlow: 'row nowrap', height: '780px'}
   return {
     display: 'flex',
     justifyContent: 'center',
@@ -21,15 +22,16 @@ export const viewContainer = (): Record<string, string> => {
 
 export const flexContainer = (width?: number): Record<string, string> => {
   let media: Record<string, string> = {
-    height: '580px', padding: '.5rem',
+    height: '580px',
+    padding: '1rem .5rem',
   }
-  if (StylesCommon.mediaMobile.matches) media = {
-    height: '670px', padding: '1rem',
+  if (StylesCommon.mediaSmall.matches) media = {
+    height: '670px', padding: '2rem 1rem',
   }
-  if (StylesCommon.mediaTablet.matches) media = {
-    height: '720px', padding: '1.5rem',
+  if (StylesCommon.mediaMedium.matches) media = {
+    height: '720px', padding: '2rem 1.5rem',
   }
-  if (StylesCommon.mediaLaptop.matches) media = {
+  if (StylesCommon.mediaLarge.matches) media = {
     height: '640px', padding: '1.7rem',
   }
   return {
@@ -44,13 +46,13 @@ export const innerRowContainer = (): Record<string, string> => {
   let media: Record<string, string> = {
     height: '175px',
   }
-  if (StylesCommon.mediaMobile.matches) media = {
+  if (StylesCommon.mediaSmall.matches) media = {
     height: '200px'
   }
-  if (StylesCommon.mediaTablet.matches) media = {
+  if (StylesCommon.mediaMedium.matches) media = {
     height: '225px'
   }
-  if (StylesCommon.mediaLaptop.matches) media = {
+  if (StylesCommon.mediaLarge.matches) media = {
     height: '250px',
   }
   return {
@@ -61,38 +63,12 @@ export const innerRowContainer = (): Record<string, string> => {
   }
 }
 
-export const commonButton = (disabled?: boolean, bkgColor?: string, color?: string): Record<string, string> => {
-  let media: Record<string, string> = {
-    width: '70px', height: '35px', fontSize: 'var(--text-size-smaller)'
-  }
-  if (StylesCommon.mediaMobile.matches) media = {
-    width: '80px', height: '40px', fontSize: 'var(--text-size)'
-  }
-  if (StylesCommon.mediaTablet.matches) media = {
-    width: '85px', height: '45px',
-  }
-  if (StylesCommon.mediaLaptop.matches) media = {
-    width: '87px', height: '47px',
-  }
-  return {
-    cursor: disabled ? 'not-allowed' : 'pointer',
-    background: bkgColor ?? 'var(--bkg-color)',
-    color: color ?? 'var(--text-color)',
-    border: `2px solid ${color ?? 'var(--text-color)'}`,
-    borderRadius: '25px',
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...media
-  }
-}
-
 export const commonIcon = (menuIcon?: boolean): Record<string, string> => {
-  let size: number = 23
+  let size: number = 22
   let display: Record<string, string> = {display: 'inline-flex'}
-  if (StylesCommon.mediaMobile.matches) size = 30
-  if (StylesCommon.mediaTablet.matches) size = 35
-  if (StylesCommon.mediaLaptop.matches) {
+  if (StylesCommon.mediaSmall.matches) size = 27
+  if (StylesCommon.mediaMedium.matches) size = 30
+  if (StylesCommon.mediaLarge.matches) {
     display = {display: menuIcon ? 'none' : 'inline-flex'}
     size = 30
   }

@@ -36,41 +36,27 @@ import {Component, Input} from '@angular/core'
       </div>
     </article>
   `,
-  styles: [`
-    a {
-      color: var(--text-color);
-    }
-
-    .card-container {
-      position: absolute;
-      border-radius: 25px;
-      overflow: hidden;
-      width: 200px;
-      height: 170px;
-    }
-
-    @media (min-width: 360px) {
+  styleUrls: ['card.component.css'],
+  styles: [
+    `@media (min-width: 360px) {
       .card-container {
         width: 250px;
         height: 195px;
       }
-    }
-
-    @media (min-width: 600px) {
+    }`,
+    `@media (min-width: 600px) {
       .card-container {
-        width: 300px;
+        width: 320px;
         height: 215px;
       }
-    }
-
-    @media (min-width: 820px) {
+    }`,
+    `@media (min-width: 820px) {
       .card-container {
         width: 350px;
         height: 215px;
       }
-    }
-  `],
-  styleUrls: ['card-project.component.css', 'card-cert.component.css'],
+    }`
+  ],
 })
 export class CardComponent {
   @Input() isCert: boolean = false

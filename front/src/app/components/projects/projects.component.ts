@@ -1,14 +1,16 @@
-import {Component, ViewEncapsulation} from '@angular/core'
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core'
 import {flexContainer} from '../../common/styles.common'
 import {ContentService} from '../../services/content.service'
 import {Certificate, Project} from '../../models/content'
 import {SwiperOptions} from 'swiper'
+import {Subscription} from 'rxjs'
 
 @Component({
   selector: 'app-projects',
+  encapsulation: ViewEncapsulation.None,
   template: `
     <section [ngStyle]="flexContainer()">
-      <h2>{{ 'my_projects' | translate }}</h2>
+      <h2 class="projects-title">{{ 'my_projects' | translate }}</h2>
       <swiper class="swiper-container" [config]="configSwiper">
         <ng-container *ngFor="let project of projects; trackBy: trackByProjects">
           <ng-template swiperSlide>
@@ -23,7 +25,7 @@ import {SwiperOptions} from 'swiper'
           </ng-template>
         </ng-container>
       </swiper>
-      <h2>{{ 'my_certs' | translate }}</h2>
+      <h2 class="projects-title">{{ 'my_certs' | translate }}</h2>
       <swiper class="swiper-container" [config]="configSwiper">
         <ng-container *ngFor="let cert of certificates; trackBy: trackByCerts">
           <ng-template swiperSlide>
@@ -40,12 +42,42 @@ import {SwiperOptions} from 'swiper'
     </section>
   `,
   styleUrls: ['projects.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styles: [
+    `@media (min-width: 360px) {
+      .swiper-container {
+        height: 200px;
+      }
+    }`,
+    `@media (min-width: 600px) {
+      .swiper-container {
+        height: 225px;
+
+        .swiper-button-prev, .swiper-button-next {
+          font-weight: 400;
+        }
+      }
+    }`,
+    `@media (min-width: 820px) {
+      .swiper-container {
+        height: 250px;
+
+        .swiper-button-prev, .swiper-button-next {
+          font-weight: 900;
+        }
+      }
+    }`,
+    `@media (min-width: 1340px) {
+      .swiper-container .swiper-wrapper.swiper-slide {
+        padding-left: 2rem;
+      }
+    }`
+  ]
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit, OnDestroy {
   protected readonly flexContainer = flexContainer
   projects: Project[] = []
   certificates: Certificate[] = []
+  projectCertSub?: Subscription
 
   configSwiper: SwiperOptions = {
     virtual: true,
@@ -61,8 +93,20 @@ export class ProjectsComponent {
     }
   }
 
+  trackByProjects = (index: number, project: Project): string => project.id
+
+  trackByCerts = (index: number, cert: Certificate): string => cert.id
+
+  setDescByLang(objectWithDesc: Project | Certificate) {
+    let lang = document.documentElement.lang === 'en'
+    return lang ? objectWithDesc?.desc_en ?? '' : objectWithDesc?.desc_pt ?? ''
+  }
+
   constructor(private contentService: ContentService) {
-    this.contentService.getContent().subscribe({
+  }
+
+  ngOnInit(): void {
+    this.projectCertSub = this.contentService.getContent().subscribe({
       next: data => {
         this.projects = data.projects
         this.certificates = data.certificates
@@ -71,12 +115,7 @@ export class ProjectsComponent {
     })
   }
 
-  trackByProjects = (index: number, project: Project): string => project.id
-
-  trackByCerts = (index: number, cert: Certificate): string => cert.id
-
-  setDescByLang(objectWithDesc: Project | Certificate) {
-    let lang = document.documentElement.lang === 'en'
-    return lang ? objectWithDesc?.desc_en ?? '' : objectWithDesc?.desc_pt ?? ''
+  ngOnDestroy(): void {
+    this.projectCertSub?.unsubscribe()
   }
 }

@@ -1,10 +1,4 @@
-a {
-  color: var(--text-color);
-  display: inline-flex;
-  align-items: center;
-}
-
-h2 {
+.contact-title {
   margin: 15px 5px;
   font-size: var(--title-size);
   color: var(--text-color);
@@ -19,44 +13,21 @@ h2 {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-}
-
-.contact-number, .contact-or {
-  font-size: var(--title-size-smaller);
-  font-weight: 500;
-  margin-top: 10px;
-}
-
-
-i {
-  font-size: var(--title-size);
-  color: darkgreen
-}
-
-@media (min-width: 820px) {
-  .contact-container {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-  }
-
-  .contact-number, .contact-or {
-    font-size: var(--text-size);
-    font-weight: 600;
-    margin-top: 10px;
-  }
-}
-
-@media (min-width: 920px) {
-  .contact-container {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-  }
 
   .contact-number, .contact-or {
     font-size: var(--title-size-smaller);
     font-weight: 500;
-    margin: 0;
+    margin-top: 10px;
+  }
+
+  .contact-number a {
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+
+    & i {
+      font-size: var(--title-size);
+      color: darkgreen
+    }
   }
 }
