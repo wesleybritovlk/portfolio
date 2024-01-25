@@ -1,0 +1,71 @@
+.state-btn {
+  cursor: pointer;
+  width: 70px;
+  height: 40px;
+  font-size: var(--text-size-smaller);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bkg-color);
+  color: var(--text-color);
+  border: 2px solid var(--text-color);
+  border-radius: 25px;
+  transition: .3s ease-in-out;
+
+  .btn-icon {
+    font-size: var(--title-size-smaller);
+    font-weight: 900;
+  }
+
+  .--loading {
+    animation: rotate 2s 0s infinite;
+    will-change: rotate;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background-color: #C800007F;
+    color: var(--text-color);
+    border-color: var(--text-color);
+    transition: .3s ease-in-out;
+  }
+
+  &.--send:disabled {
+    background-color: #21C8007F;
+    transition: .3s ease-in-out;
+  }
+
+  &:hover:disabled, &.--send:hover:disabled {
+    border-color: transparent;
+    transform: scale(1.05);
+    will-change: transform;
+  }
+
+  &:active:disabled, &.--send:active:disabled {
+    color: var(--text-color);
+    box-shadow: none;
+    transform: scale(1.05);
+  }
+
+  &:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+    will-change: transform;
+  }
+
+  &:active {
+    color: var(--primary-color);
+    box-shadow: 0 0 5px 0 var(--primary-color);
+    transform: scale(1);
+    will-change: transform;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

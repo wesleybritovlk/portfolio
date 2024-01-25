@@ -1,0 +1,11 @@
+@media (min-width: 820px) {
+  :root {
+    --text-size-smaller: .73rem;
+    --text-size: .9rem;
+    --text-size-large: 1.1rem;
+    --text-size-about: 1.18rem;
+    --title-size-smaller: 1.3rem;
+    --title-size: 1.7rem;
+    --title-size-large: 3.1rem;
+  }
+}

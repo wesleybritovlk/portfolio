@@ -1,0 +1,38 @@
+.projects-title {
+  margin: 15px 5px;
+  font-size: var(--title-size);
+  color: var(--text-color);
+}
+
+.swiper-container {
+  position: relative;
+  width: 100%;
+  height: 175px;
+  border-radius: 25px;
+  border: 2px solid var(--text-color);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  z-index: 0;
+
+  .swiper-button-prev, .swiper-button-next {
+    color: var(--primary-color);
+    font-weight: 200;
+  }
+
+  .swiper-button-prev {
+    padding-right: 1rem;
+  }
+
+  .swiper-button-next {
+    padding-left: 1rem;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: var(--primary-color);
+  }
+
+  .swiper-wrapper .swiper-slide {
+    padding-left: 1rem;
+  }
+}

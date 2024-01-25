@@ -1,0 +1,100 @@
+.card-container {
+  position: absolute;
+  border-radius: 25px;
+  overflow: hidden;
+  width: 200px;
+  height: 170px;
+
+  .project-modal {
+    position: relative;
+    border-radius: 25px;
+    height: 100%;
+    width: 100%;
+    transform: translateY(71%);
+    transition: .75s ease-in-out;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    background: var(--modal-color);
+
+    .modal-title, .modal-desc {
+      color: var(--text-color);
+    }
+
+    .modal-title {
+      display: flex;
+      flex-flow: row nowrap;
+      width: 100%;
+      justify-content: space-between;
+      padding: 20px;
+      font-size: var(--title-size-smaller);
+
+      .title-links a .project-links {
+        transition: .3s ease-in-out;
+        color: var(--text-color);
+
+        &:hover, &:focus-within, &:active {
+          color: var(--primary-color);
+        }
+      }
+    }
+
+    .modal-desc {
+      width: 90%;
+      font-size: var(--text-size-smaller);
+    }
+  }
+
+  &:hover .project-modal,
+  &:focus-within .project-modal,
+  &:active .project-modal {
+    border: 2px solid var(--primary-color);
+    transform: translateY(0);
+  }
+
+  .cert-modal {
+    position: relative;
+    border-radius: 25px;
+    height: 100%;
+    width: 100%;
+    visibility: hidden;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    transition: .5s ease-in-out;
+
+    .cert-title, a .cert-link, .cert-desc {
+      color: var(--text-color);
+    }
+
+    .cert-title {
+      font-size: var(--title-size-smaller);
+    }
+
+    a .cert-link {
+      font-size: var(--title-size-large);
+      transition: .3s ease-in-out;
+
+      &:hover, &:focus-within, &:active {
+        color: var(--primary-color);
+      }
+    }
+
+    .cert-desc {
+      font-size: var(--text-size-smaller);
+    }
+  }
+
+  &:hover .cert-modal,
+  &:focus-within .cert-modal,
+  &:active .cert-modal {
+    visibility: visible;
+    border: 3px solid var(--primary-color);
+    background: var(--modal-color);
+    color: var(--primary-color-light);
+  }
+}

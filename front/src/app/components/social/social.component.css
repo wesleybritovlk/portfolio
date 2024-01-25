@@ -1,0 +1,25 @@
+.social-container .social-links, .social-container .social-email {
+  position: relative;
+  z-index: 0;
+  top: -7.5rem;
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: center;
+  color: var(--text-color);
+
+  & a {
+    color: var(--text-color);
+
+    & i, & label {
+      cursor: pointer;
+      transition: .3s ease-in-out;
+
+      &:hover,
+      &:focus-within,
+      &:active {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+    }
+  }
+}

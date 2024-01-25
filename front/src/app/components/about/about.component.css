@@ -1,0 +1,42 @@
+.about-title {
+  margin: 15px 5px;
+  font-size: var(--title-size);
+  color: var(--text-color);
+}
+
+.about-container {
+  border: 2px solid var(--text-color);
+  border-radius: 25px;
+  color: var(--text-color);
+  padding: 10px;
+  font-size: var(--text-size-about);
+}
+
+.skills-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .skills-icons {
+    border: 2px solid var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    margin: 3px;
+    padding: 7px;
+    font-size: var(--title-size);
+    transition: .5s ease-out;
+    will-change: transform;
+
+    &:hover,
+    &:focus-within,
+    &:active {
+      border-color: var(--primary-color);
+      color: var(--primary-color);
+      box-shadow: 0 5px 10px 1px var(--primary-color-dark);
+      transform: translateY(-5px);
+      will-change: transform;
+    }
+  }
+}

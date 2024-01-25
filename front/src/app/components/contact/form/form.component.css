@@ -1,0 +1,52 @@
+.form {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 215px;
+  height: 100%;
+  margin: 5px 0;
+  padding: 0 10px;
+  gap: 10px;
+
+  .form-field {
+    margin-top: 10px;
+    margin-bottom: 2px;
+
+    .field-label {
+      font-size: var(--text-size);
+      margin: 5px 0;
+    }
+
+    .field-label .required, .error {
+      color: red;
+      font-size: var(--text-size-smaller);
+    }
+
+    .field-input, .field-textarea {
+      border-radius: 10px;
+      font-size: var(--text-size);
+      padding: 5px;
+      height: 1.5rem;
+      min-width: 100%;
+      max-width: 100%;
+      background: var(--input-color);
+      color: var(--text-color);
+    }
+
+    .field-input.--invalid {
+      border: 2px solid red;
+    }
+
+    .field-textarea {
+      min-height: 125px;
+      height: 125px;
+      max-height: 125px;
+    }
+  }
+
+  .form-button {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,33 @@
+.contact-title {
+  margin: 15px 5px;
+  font-size: var(--title-size);
+  color: var(--text-color);
+}
+
+.contact-container {
+  border: 2px solid var(--text-color);
+  border-radius: 25px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  .contact-number, .contact-or {
+    font-size: var(--title-size-smaller);
+    font-weight: 500;
+    margin-top: 10px;
+  }
+
+  .contact-number a {
+    color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+
+    & i {
+      font-size: var(--title-size);
+      color: darkgreen
+    }
+  }
+}

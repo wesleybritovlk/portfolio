@@ -1,0 +1,20 @@
+{
+  "nav_home": "Início",
+  "nav_about": "Sobre",
+  "nav_projects": "Projetos",
+  "nav_contact": "Contato",
+  "home_hello": "Olá, eu sou",
+  "home_desc": "E sou Desenvolvedor de Software",
+  "about_me": "Sobre mim",
+  "about_skills": "Habilidades",
+  "my_projects": "Meus projetos",
+  "my_certs": "Meus certificados",
+  "contact_me": "Contate-me",
+  "contact_or": "ou",
+  "form_first-name": "Nome",
+  "form_last-name": "Sobrenome",
+  "form_email": "E-mail",
+  "form_message": "Mensagem",
+  "form_required-name": "O nome é obrigatório",
+  "form_required-email": "O e-mail é obrigatório"
+}

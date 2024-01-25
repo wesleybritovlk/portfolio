@@ -1,0 +1,20 @@
+{
+  "nav_home": "Home",
+  "nav_about": "About",
+  "nav_projects": "Projects",
+  "nav_contact": "Contact",
+  "home_hello": "Hello, I'm",
+  "home_desc": "And I'm a Software Developer",
+  "about_me": "About me",
+  "about_skills": "Skills",
+  "my_projects": "My Projects",
+  "my_certs": "My Certificates",
+  "contact_me": "Contact me",
+  "contact_or": "or",
+  "form_first-name": "First name",
+  "form_last-name": "Last name",
+  "form_email": "Email",
+  "form_message": "Message",
+  "form_required-name": "Name is required",
+  "form_required-email": "Email is required"
+}

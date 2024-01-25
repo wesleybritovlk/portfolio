@@ -1,0 +1,28 @@
+.hero-container {
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  justify-content: center;
+  align-items: center;
+
+  .hero-info {
+    width: 225px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0;
+    gap: .5rem 0;
+
+    .info-text {
+      color: var(--text-color);
+      font-size: var(--text-size-large);
+      font-weight: 500;
+    }
+
+    .info-title {
+      color: var(--primary-color-dark);
+      font-size: var(--title-size-large);
+      font-weight: 700;
+    }
+  }
+}
