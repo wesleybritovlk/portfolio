@@ -59,7 +59,7 @@
         align-items: start;
         overflow: hidden;
         visibility: hidden;
-        transition: visibility .6s;
+        transition: visibility .3s;
         will-change: visibility;
 
         .menu-item {

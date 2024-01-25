@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Output} from '@angular/core'
+import {Component, EventEmitter, Output} from '@angular/core'
 import {commonIcon, StylesCommon} from '../../common/styles.common'
 import {TranslateService} from '@ngx-translate/core'
 
@@ -14,10 +14,11 @@ import {TranslateService} from '@ngx-translate/core'
           <app-check-button class="states-btn" iconOn="fi fi-br" iconOff="fi fi-us"
                             (isChecked)="onChangeLang($event)" [check]="setCurrentLang()"/>
         </div>
-        <div class="nav-menu" [class.--active]="onActiveMenu(activeMenu)">
-          <div class="menu-btn" [ngStyle]="commonIcon(true)" (click)="activeMenu = !activeMenu">
-            <i *ngIf="activeMenu" class="ri-close-fill"></i>
-            <i *ngIf="!activeMenu" class="ri-menu-fill"></i>
+        <div class="nav-menu" [class.--active]="onActiveMenu(toggleMenu)"
+             (clickOutside)="toggleMenu = false">
+          <div class="menu-btn" [ngStyle]="commonIcon(true)" (click)="toggleMenu = !toggleMenu">
+            <i *ngIf="toggleMenu" class="ri-close-fill"></i>
+            <i *ngIf="!toggleMenu" class="ri-menu-fill"></i>
           </div>
           <ul class="menu">
             <li class="menu-item" (click)="onClickPage('home')">{{ 'nav_home' | translate }}</li>
@@ -82,7 +83,7 @@ import {TranslateService} from '@ngx-translate/core'
 export class HeaderComponent {
   protected readonly commonIcon = commonIcon
   @Output() pageTarget: EventEmitter<string> = new EventEmitter()
-  activeMenu: boolean = false
+  toggleMenu: boolean = false
 
   constructor(private translate: TranslateService) {
     this.setCurrentTheme()

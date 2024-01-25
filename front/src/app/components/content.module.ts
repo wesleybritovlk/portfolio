@@ -25,6 +25,7 @@ import {FormService} from '../services/form.service'
 import {GlowButtonComponent} from './glow-button/glow-button.component'
 import {ResumeButtonComponent} from './resume-button/resume-button.component'
 import {StateButtonComponent} from './contact/form/state-button/state-button.component'
+import {ClickOutsideDirective} from '../directives/click-outside.directive'
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {StateButtonComponent} from './contact/form/state-button/state-button.com
     GlowButtonComponent,
     ResumeButtonComponent,
     StateButtonComponent,
+    ClickOutsideDirective
   ],
   exports: [
     HeaderComponent,
@@ -63,7 +65,7 @@ import {StateButtonComponent} from './contact/form/state-button/state-button.com
     ReactiveFormsModule,
     TranslatedModule,
     SwiperAngularModule,
-    NgxMaskModule
+    NgxMaskModule,
   ],
   providers: [
     ContentService,
