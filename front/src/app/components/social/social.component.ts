@@ -21,48 +21,57 @@ import {Subscription} from 'rxjs'
     </div>
   `,
   styleUrls: ['social.component.css'],
-  styles: [`@media (min-width: 820px) {
-    .social-container {
-      position: fixed;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-
-      .social-links, .social-email {
-        z-index: -1;
-        position: absolute;
-        margin-bottom: 0;
-        transform: rotate(90deg);
-        display: flex;
-        align-items: center;
-        width: 25rem;
-        top: -7.2rem;
-      }
-
-      .social-links:after, .social-email:after {
-        content: "";
-        display: flex;
-        flex-flow: row nowrap;
-        margin-left: 15px;
-        border-bottom: var(--text-color) 2px solid;
+  styles: [
+    `@media (min-width: 820px) {
+      .social-container {
+        position: fixed;
         width: 100%;
-      }
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
 
-      .social-links {
-        left: -8.5rem;
+        .social-links, .social-email {
+          z-index: -1;
+          position: absolute;
+          margin-bottom: 0;
+          transform: rotate(90deg);
+          display: flex;
+          align-items: center;
+          width: 100%;
+        }
 
-        & a i {
-          padding: 0 24px;
-          transform: rotate(-90deg);
+        .social-links:after, .social-email:after {
+          content: "";
+          display: flex;
+          flex-flow: row nowrap;
+          margin-left: 15px;
+          border-bottom: var(--text-color) 2px solid;
+          width: 100%;
+        }
+
+        .social-links {
+          left: -21%;
+
+          & a i {
+            padding: 0 24px;
+            transform: rotate(-90deg);
+          }
+        }
+
+        .social-email {
+          right: -21%;
+          font-size: var(--text-size);
         }
       }
-
-      .social-email {
-        right: -8.5rem;
-        font-size: var(--text-size);
+    }`,
+    `@media (min-width: 1340px) {
+      .social-container {
+        .social-links:after, .social-email:after {
+          width: 40%;
+        }
       }
-    }
-  }`]
+    }`
+  ]
 })
 export class SocialComponent implements OnInit, OnDestroy {
   protected readonly commonIcon = commonIcon

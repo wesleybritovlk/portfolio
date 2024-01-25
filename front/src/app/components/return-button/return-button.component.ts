@@ -5,8 +5,7 @@ import {Component} from '@angular/core'
   template: `
     <div class="return-container">
       <button class="return-btn ri-arrow-up-fill"
-              [ngStyle]="styleByScroll()"
-              (click)="onClick()"
+              [ngStyle]="styleByScroll()" (click)="onClick()"
       ></button>
     </div>
   `,
@@ -67,10 +66,7 @@ import {Component} from '@angular/core'
 })
 export class ReturnButtonComponent {
   styleByScroll = (): Record<string, string> =>
-    document.documentElement.scrollTop > 540 ? {display: 'block'} : {display: 'none'}
+    document.documentElement.scrollTop > 500 ? {display: 'block'} : {display: 'none'}
 
-  onClick() {
-    document.body.scrollTop = 0
-    document.documentElement.scrollTop = 0
-  }
+  onClick = () => document.documentElement.scrollTop = 0
 }

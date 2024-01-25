@@ -6,7 +6,7 @@ import {Subscription} from 'rxjs'
 @Component({
   selector: 'app-github-star',
   template: `
-    <a class="github-button" [href]="github?.url"
+    <a class="github-button" [href]="github?.url" target="_blank"
        data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large"
        data-show-count="true" [attr.aria-label]="setArialLabel(github)">Star</a>
   `,

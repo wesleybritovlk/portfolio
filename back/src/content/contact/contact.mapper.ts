@@ -7,10 +7,10 @@ export class ContactMapper {
   toModel = (request: ContactRequest): Contact =>
     new Contact(
       request.mobile,
-      `https://wa.me/send/?phone=${
+      `https://api.whatsapp.com/send/?phone=${
         request.mobile
       }&text=Hello Wesley, I saw your portfolio and would like more information`,
-      `https://wa.me/send/?phone=${
+      `https://api.whatsapp.com/send/?phone=${
         request.mobile
       }&text=Olá Wesley, vi seu portfólio e gostaria de mais informações`,
       request.resume_url,
