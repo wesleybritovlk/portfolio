@@ -22,9 +22,11 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "@ngx-translate/core": "^15.0.0",
+    "build": "^0.1.4",
     "devicon": "^2.15.1",
     "flag-icons": "^7.1.0",
     "github-buttons": "^2.27.0",
+    "ng": "^0.0.0",
     "ngx-mask": "^16.4.2",
     "remixicon": "^4.0.1",
     "rxjs": "~7.8.0",
@@ -44,7 +46,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "lite-server": "^2.6.1",
     "typescript": "~5.1.3"
   }
 }

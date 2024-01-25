@@ -28,7 +28,6 @@ import {Subscription} from 'rxjs'
         width: 100%;
         display: flex;
         justify-content: space-between;
-        align-items: start;
 
         .social-links, .social-email {
           z-index: -1;

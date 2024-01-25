@@ -246,6 +246,36 @@ classDiagram
 }
 ```
 
+
+## Running the app
+
+**Prerequisites:**
+
+-  Node.js version 18.19 or higher (Check your version: `node -v`)
+
+**Steps:**
+
+1. **Front-end:**
+
+```bash
+cd front
+npm install
+ng serve
+```
+
+2. **Back-end:**
+
+```bash
+cd back
+npm install
+nest start
+```
+
+**That's it! Now you can access the app:**
+
+- **Front-end:** `http://localhost:4200`
+- **Back-end:** `http://localhost:3000`
+
 ## License
 
 This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.
