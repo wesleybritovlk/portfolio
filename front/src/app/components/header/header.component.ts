@@ -39,46 +39,47 @@ import {TranslateService} from '@ngx-translate/core'
     .header {
       padding: 0 1rem;
     }
-  }`, `@media (min-width: 820px) {
-    .header {
-      padding: 0 1.5rem;
+  }`,
+    `@media (min-width: 820px) {
+      .header {
+        padding: 0 1.5rem;
 
-      .header-nav {
-        flex-flow: row-reverse nowrap;
+        .header-nav {
+          flex-flow: row-reverse nowrap;
 
-        .nav-menu .menu-btn {
-          display: none;
-        }
+          .nav-menu .menu-btn {
+            display: none;
+          }
 
-        .nav-menu .menu {
-          display: inline-flex;
-          position: relative;
-          width: 100%;
-          top: 0;
-          background: transparent;
+          .nav-menu .menu {
+            display: inline-flex;
+            position: relative;
+            width: 100%;
+            top: 0;
+            background: transparent;
 
-          .menu-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 37px;
-            width: fit-content;
-            margin: 0 10px;
-            padding: 7px 10px;
-            border-radius: 25px;
-            border: 2px solid transparent;
+            .menu-item {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 37px;
+              width: fit-content;
+              margin: 0 10px;
+              padding: 7px 10px;
+              border-radius: 25px;
+              border: 2px solid transparent;
 
-            &:hover {
-              border-color: var(--primary-color-light);
-              color: var(--primary-color-light);
-              box-shadow: 1px 2px 10px 0 var(--primary-color);
-              background: none;
+              &:hover, &:focus-within {
+                border-color: var(--primary-color-light);
+                color: var(--primary-color-light);
+                box-shadow: 1px 2px 10px 0 var(--primary-color);
+                background: var(--bkg-color);
+              }
             }
           }
         }
       }
-    }
-  }`]
+    }`]
 })
 export class HeaderComponent {
   protected readonly commonIcon = commonIcon

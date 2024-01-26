@@ -42,7 +42,7 @@
         font-weight: 600;
       }
 
-      .menu-btn:hover, .menu-btn:active, .menu-btn:focus-within, &.--active .menu-btn {
+      .nav-menu.--active .menu-btn, .menu-btn:hover, .menu-btn:active, .menu-btn:focus-within {
         color: var(--primary-color);
       }
 

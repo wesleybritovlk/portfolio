@@ -40,6 +40,10 @@ import {Subscription} from 'rxjs'
       margin: 1.2%;
       padding: 10px;
     }
+  }`, `@media (min-width: 1340px) {
+    .skills-container .skills-icons {
+      font-size: var(--title-size-extra-large);
+    }
   }`]
 })
 export class AboutComponent implements OnInit, OnDestroy {

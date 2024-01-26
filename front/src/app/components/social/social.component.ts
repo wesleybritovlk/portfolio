@@ -36,7 +36,7 @@ import {Subscription} from 'rxjs'
           transform: rotate(90deg);
           display: flex;
           align-items: center;
-          width: 100%;
+          width: 50%;
         }
 
         .social-links:after, .social-email:after {

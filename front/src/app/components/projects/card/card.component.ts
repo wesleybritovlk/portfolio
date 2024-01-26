@@ -27,8 +27,8 @@ import {Component, Input} from '@angular/core'
         <div class="cert-title">
           <h4>{{ title }}</h4>
         </div>
-        <a target="_blank" [href]="webUrl">
-          <i class="cert-link ri-external-link-line"></i>
+        <a class="cert-link" target="_blank" [href]="webUrl">
+          <i class="ri-external-link-line"></i>
         </a>
         <p class="cert-desc">
           {{ description }}
@@ -52,7 +52,7 @@ import {Component, Input} from '@angular/core'
     }`,
     `@media (min-width: 820px) {
       .card-container {
-        width: 350px;
+        width: 345px;
         height: 215px;
       }
     }`

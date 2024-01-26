@@ -5,6 +5,7 @@
 }
 
 .swiper-container {
+  z-index: 0;
   position: relative;
   width: 100%;
   height: 175px;
@@ -13,7 +14,6 @@
   overflow: hidden;
   display: flex;
   align-items: center;
-  z-index: 0;
 
   .swiper-button-prev, .swiper-button-next {
     color: var(--primary-color);

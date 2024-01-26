@@ -10,13 +10,14 @@
     border-radius: 25px;
     height: 100%;
     width: 100%;
-    transform: translateY(71%);
-    transition: .75s ease-in-out;
     overflow: hidden;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
     background: var(--modal-color);
+    transition: .75s ease-in-out;
+    transform: translateY(71%);
+    will-change: transform;
 
     .modal-title, .modal-desc {
       color: var(--text-color);
@@ -46,13 +47,6 @@
     }
   }
 
-  &:hover .project-modal,
-  &:focus-within .project-modal,
-  &:active .project-modal {
-    border: 2px solid var(--primary-color);
-    transform: translateY(0);
-  }
-
   .cert-modal {
     position: relative;
     border-radius: 25px;
@@ -66,6 +60,7 @@
     justify-content: center;
     padding: 1rem;
     transition: .5s ease-in-out;
+    will-change: visibility;
 
     .cert-title, a .cert-link, .cert-desc {
       color: var(--text-color);
@@ -75,26 +70,34 @@
       font-size: var(--title-size-smaller);
     }
 
-    a .cert-link {
-      font-size: var(--title-size-large);
-      transition: .3s ease-in-out;
-
-      &:hover, &:focus-within, &:active {
-        color: var(--primary-color);
-      }
-    }
-
     .cert-desc {
       font-size: var(--text-size-smaller);
     }
-  }
 
-  &:hover .cert-modal,
-  &:focus-within .cert-modal,
-  &:active .cert-modal {
-    visibility: visible;
-    border: 3px solid var(--primary-color);
-    background: var(--modal-color);
-    color: var(--primary-color-light);
+    .cert-link {
+      color: var(--text-color);
+      font-size: var(--title-size-large);
+      transition: .3s ease-in-out;
+    }
+
+    .cert-link:hover, .cert-link:active {
+      color: var(--primary-color);
+    }
   }
+}
+
+.card-container:hover .project-modal,
+.card-container:active .project-modal {
+  border: 2px solid var(--primary-color);
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.card-container:hover .cert-modal,
+.card-container:active .cert-modal {
+  visibility: visible;
+  border: 3px solid var(--primary-color);
+  background: var(--modal-color);
+  color: var(--primary-color-light);
+  will-change: visibility;
 }
