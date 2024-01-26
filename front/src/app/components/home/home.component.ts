@@ -34,10 +34,9 @@ import {Component} from '@angular/core'
         width: 100%;
 
         .hero-info, .hero-image {
-          width: 450px;
+          width: 460px;
           height: 640px;
           display: flex;
-          align-items: center;
           flex-flow: column nowrap;
           justify-content: center;
         }
@@ -45,11 +44,15 @@ import {Component} from '@angular/core'
         .hero-info {
           align-items: start;
           margin: 0;
-          padding-left: 2%;
+          padding-left: 3%;
 
           .info-text {
             font-weight: 600;
           }
+        }
+
+        .hero-image {
+          align-items: center;
         }
       }
     }`,

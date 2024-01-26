@@ -36,13 +36,12 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
 
 #### Components:
 
-- [ ] AppComponent:
-    - [ ] HeaderComponent:
+- [X] AppComponent:
+    - [X] HeaderComponent:
         - [X] Logo:
             - [X] TipewriterComponent
-        - [ ] Nav:
+        - [X] Nav:
             - [X] CheckButtonComponent
-            - [ ] GlowButtonComponent
     - [X] HomeComponent:
         - [X] HeroText
         - [X] HeroImage:
