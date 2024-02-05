@@ -1,37 +1,11 @@
-import { Column } from 'typeorm';
-import { v4 as uuidv4 } from 'uuid';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { Link } from './link/link';
+import { CommonEntity } from '../../common/common.entity';
 
-export class Social {
-  @Column((type) => SocialLink)
-  links: SocialLink[];
+@Entity()
+export class Social extends CommonEntity {
+  @OneToMany(() => Link, link => link.social)
+  links: Link[];
   @Column({ nullable: false })
   email: string;
-
-  constructor(links: SocialLink[], email: string) {
-    this.links = links;
-    this.email = email;
-  }
-}
-
-export class SocialLink {
-  @Column({ nullable: false, type: 'uuid' })
-  id: string;
-  @Column({ nullable: false })
-  name: string;
-  @Column({ nullable: false })
-  url: string;
-  @Column({ nullable: false, update: false, type: 'timestamp' }) createdAt: Date;
-  @Column({ nullable: false, type: 'timestamp' }) updatedAt: Date;
-
-  constructor(id: string = uuidv4(),
-              name: string,
-              url: string,
-              createdAt: Date = new Date(),
-              updatedAt: Date = new Date()) {
-    this.id = id;
-    this.name = name;
-    this.url = url;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-  }
 }

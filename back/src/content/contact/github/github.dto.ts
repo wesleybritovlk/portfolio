@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class GitHubRequest {
+export class GithubRequest {
   @IsNotEmpty()
   @IsString()
   @ApiProperty({
@@ -21,7 +21,7 @@ export class GitHubRequest {
   repo_name: string;
 }
 
-export class GitHubResponse {
+export class GithubResponse {
   @ApiProperty({
     name: 'username',
     type: 'string',
@@ -40,12 +40,4 @@ export class GitHubResponse {
     format: 'uri',
   })
   url: string;
-
-  constructor(username: string,
-              repo_name: string,
-              url: string) {
-    this.username = username;
-    this.repo_name = repo_name;
-    this.url = url;
-  }
 }

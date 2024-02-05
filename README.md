@@ -78,7 +78,7 @@ This is an API developed in NestJS with two main endpoints: 'Page Content' (GET 
 
 #### Tech Stack:
 
-    NestJS@10, MongoDB Cloud
+    NestJS@10, PostgreSQL, Redis
 
 #### Libraries:
 
@@ -88,23 +88,9 @@ This is an API developed in NestJS with two main endpoints: 'Page Content' (GET 
 
 ```mermaid
 classDiagram
-    Content --> HomeImage
-    Content --> Social
-    Content --> About
-    Content *-- Project
-    Content *-- Certificate
-    Content --> Contact
     Social *-- SocialLink
     About *-- Skill
     Contact --> Github
-    class Content {
-        HomeImage homeImage
-        Social social
-        About about
-        List~Project~ projects
-        List~Certificate~ certificates
-        Contact contact
-    }
     class HomeImage {
         String url
         String altEn
@@ -174,66 +160,64 @@ classDiagram
 
 ```JSON
 {
-  "content": {
-    "home_image": {
-      "url": "",
-      "alt_en": "",
-      "alt_pt": ""
-    },
-    "social": {
-      "links": [
-        {
-          "id": "uuid",
-          "name": "",
-          "url": ""
-        }
-      ],
-      "email": ""
-    },
-    "about": {
-      "desc_en": "",
-      "desc_pt": "",
-      "skills": [
-        {
-          "id": "uuid",
-          "tech_name": "",
-          "alt_en": "",
-          "alt_pt": ""
-        }
-      ]
-    },
-    "projects": [
+  "home_image": {
+    "url": "",
+    "alt_en": "",
+    "alt_pt": ""
+  },
+  "social": {
+    "links": [
       {
         "id": "uuid",
-        "title": "",
-        "repo_url": "",
-        "web_url": "",
-        "api_url": "",
-        "image_url": "",
-        "desc_en": "",
-        "desc_pt": ""
-      }
-    ],
-    "certificates": [
-      {
-        "id": "uuid",
-        "title": "",
-        "web_url": "",
-        "image_url": "",
-        "desc_en": "",
-        "desc_pt": ""
-      }
-    ],
-    "contact": {
-      "mobile": "",
-      "wa_en": "",
-      "wa_pt": "",
-      "resume_url": "",
-      "github": {
-        "username": "",
-        "repo_name": "",
+        "name": "",
         "url": ""
       }
+    ],
+    "email": ""
+  },
+  "about": {
+    "desc_en": "",
+    "desc_pt": "",
+    "skills": [
+      {
+        "id": "uuid",
+        "tech_name": "",
+        "alt_en": "",
+        "alt_pt": ""
+      }
+    ]
+  },
+  "projects": [
+    {
+      "id": "uuid",
+      "title": "",
+      "repo_url": "",
+      "web_url": "",
+      "api_url": "",
+      "image_url": "",
+      "desc_en": "",
+      "desc_pt": ""
+    }
+  ],
+  "certificates": [
+    {
+      "id": "uuid",
+      "title": "",
+      "web_url": "",
+      "image_url": "",
+      "desc_en": "",
+      "desc_pt": ""
+    }
+  ],
+  "contact": {
+    "mobile": "",
+    "wa_en": "",
+    "wa_pt": "",
+    "resume_url": "",
+    "github": {
+      "username": "",
+      "repo_name": "",
+      "url": ""
     }
   },
   "form": {
