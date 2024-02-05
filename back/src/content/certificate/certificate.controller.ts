@@ -1,12 +1,28 @@
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Delete, Get, HttpStatus, Inject, Param, Post, Put, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Inject,
+  Param,
+  Post,
+  Put,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import { CertificateService } from './certificate.service';
 import { Response } from 'express';
 import { CertificateRequest, CertificateResponse } from './certificate.dto';
+import { CommonController } from '../../common/common.controller';
+import { CacheInterceptor } from '@nestjs/cache-manager';
+import { CacheKey } from '@nestjs/common/cache';
 
 @ApiTags('Certificate Endpoint')
 @Controller('certificates')
-export class CertificateController {
+export class CertificateController
+  implements CommonController<CertificateRequest, CertificateResponse> {
   constructor(
     @Inject('CertificateService') private service: CertificateService,
   ) {
@@ -30,6 +46,8 @@ export class CertificateController {
   }
 
   @Get()
+  @UseInterceptors(CacheInterceptor)
+  @CacheKey('certificate_all')
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'To return Certificate list',
@@ -43,6 +61,8 @@ export class CertificateController {
   }
 
   @Get(':id')
+  @UseInterceptors(CacheInterceptor)
+  @CacheKey('certificate_id')
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'To return Certificate by id',
