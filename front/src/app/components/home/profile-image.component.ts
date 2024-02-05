@@ -72,7 +72,7 @@ export class ProfileImageComponent implements OnInit, OnDestroy {
     return {
       width: `${this.responsiveImage()}px`,
       height: `${this.responsiveImage()}px`,
-      backgroundImage: `url(${homeImage?.url})`,
+      backgroundImage: `url(${homeImage?.url}/?size=${this.responsiveImage()})`,
       backgroundSize: `${this.responsiveImage()}px`,
     }
   }
@@ -88,8 +88,8 @@ export class ProfileImageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.homeImageSub = this.contentService.getContent().subscribe({
-      next: data => this.homeImage = data.home_image,
+    this.homeImageSub = this.contentService.getHomeImages().subscribe({
+      next: data => this.homeImage = data[0],
       error: error => console.error(error)
     })
   }

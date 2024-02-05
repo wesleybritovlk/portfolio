@@ -1,12 +1,11 @@
-import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
-import { ContentModule } from '../content/content.module';
+import { TypeOrmModuleAsyncOptions } from "@nestjs/typeorm";
 
 export const databaseAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory: () => ({
-    type: 'postgres',
+    type: "postgres",
     url: process.env.DB_URL,
     synchronize: true,
     logging: true,
-    autoLoadEntities: true,
-  }),
+    autoLoadEntities: true
+  })
 };

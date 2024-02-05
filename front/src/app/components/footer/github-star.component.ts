@@ -26,8 +26,8 @@ export class GithubStarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.githubSub = this.contentService.getContent().subscribe({
-      next: data => this.github = data.contact.github,
+    this.githubSub = this.contentService.getContacts().subscribe({
+      next: data => this.github = data[0].github,
       error: error => console.error(error)
     })
   }

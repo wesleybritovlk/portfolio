@@ -70,8 +70,8 @@ export class AboutComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.aboutSub = this.contentService.getContent().subscribe({
-      next: data => this.about = data.about,
+    this.aboutSub = this.contentService.getAbouts().subscribe({
+      next: data => this.about = data[0],
       error: error => console.error(error)
     })
   }

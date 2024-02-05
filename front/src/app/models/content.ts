@@ -1,19 +1,12 @@
-export interface Content {
-  home_image: HomeImage;
-  social: Social;
-  about: About;
-  projects: Project[];
-  certificates: Certificate[];
-  contact: Contact;
-}
-
 export interface HomeImage {
+  id: string;
   url: string;
   alt_en: string;
   alt_pt: string;
 }
 
 export interface Social {
+  id: string;
   links: SocialLink[];
   email: string;
 }
@@ -25,6 +18,7 @@ export interface SocialLink {
 }
 
 export interface About {
+  id: string
   desc_en: string
   desc_pt: string
   skills: Skill[]
@@ -58,6 +52,7 @@ export interface Certificate {
 }
 
 export interface Contact {
+  id: string
   mobile: string
   wa_en: string
   wa_pt: string
