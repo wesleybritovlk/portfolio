@@ -1,12 +1,28 @@
-import { Body, Controller, Delete, Get, HttpStatus, Inject, Param, Post, Put, Res } from '@nestjs/common';
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AboutService } from './about.service';
 import { Response } from 'express';
-import { AboutRequest, AboutResponse, SkillRequest, SkillResponse } from './about.dto';
+import { CommonController } from '../../common/common.controller';
+import { AboutRequest, AboutResponse } from './about.dto';
+import { AboutService } from './about.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Inject,
+  Param,
+  Post,
+  Put,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CacheInterceptor } from '@nestjs/cache-manager';
+import { CacheKey } from '@nestjs/common/cache';
 
 @ApiTags('About Endpoint')
-@Controller('content/about')
-export class AboutController {
+@Controller('abouts')
+export class AboutController
+  implements CommonController<AboutRequest, AboutResponse> {
   constructor(
     @Inject('AboutService') private service: AboutService,
   ) {
@@ -15,101 +31,79 @@ export class AboutController {
   @Post()
   @ApiResponse({
     status: HttpStatus.CREATED,
-    description: 'About description and skill List empty created successfully.',
+    description: 'About created successfully.',
   })
   @ApiBody({
-    description: 'To create About description and skill list',
+    description: 'To create About',
     type: AboutRequest,
   })
-  async post(@Res() res: Response, @Body() request: AboutRequest) {
-    await this.service.save(request);
-    return res.status(HttpStatus.CREATED).send('About description and skill List empty created successfully.');
+  async post(
+    @Res() res: Response,
+    @Body() request: AboutRequest,
+  ): Promise<Response> {
+    await this.service.create(request);
+    return res.status(HttpStatus.CREATED).send('About created successfully.');
   }
 
   @Get()
+  @UseInterceptors(CacheInterceptor)
+  @CacheKey('about_all')
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'To return About description and skill list',
+    description: 'To return About list',
     type: AboutResponse,
   })
-  async get(@Res({ passthrough: true }) res: Response) {
+  async get(
+    @Res({ passthrough: true }) res: Response,
+  ): Promise<AboutResponse[]> {
     res.status(HttpStatus.OK);
     return await this.service.find();
   }
 
-  @Put()
+  @Get(':id')
+  @UseInterceptors(CacheInterceptor)
+  @CacheKey('about_id')
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'About description updated successfully.',
+    description: 'To update About by id',
+    type: AboutResponse,
+  })
+  async getById(
+    @Res({ passthrough: true }) res: Response,
+    @Param('id') id: string,
+  ): Promise<AboutResponse> {
+    res.status(HttpStatus.OK);
+    return await this.service.findOne(id);
+  }
+
+  @Put(':id')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'About updated successfully.',
   })
   @ApiBody({
-    description: 'To update About description',
+    description: 'To update About by id',
     type: AboutRequest,
   })
-  async put(@Res() res: Response, @Body() request: AboutRequest) {
-    await this.service.update(request);
+  async put(
+    @Res() res: Response,
+    @Param('id') id: string,
+    @Body() request: AboutRequest,
+  ): Promise<Response> {
+    await this.service.update(id, request);
     return res.status(HttpStatus.OK).send('About description updated successfully.');
   }
 
-  @Post('skills')
-  @ApiResponse({
-    status: HttpStatus.CREATED,
-    description: 'About skill created successfully.',
-  })
-  @ApiBody({
-    description: 'To create About skill',
-    type: SkillRequest,
-  })
-  async postSkill(
-    @Res() res: Response,
-    @Body() request: SkillRequest,
-  ) {
-    await this.service.createSkill(request);
-    return res.status(HttpStatus.CREATED).send('About skill created successfully.');
-  }
-
-  @Get('skills/:id')
+  @Delete(':id')
   @ApiResponse({
     status: HttpStatus.OK,
-    description: 'To return About skill by id',
-    type: SkillResponse,
+    description: 'About deleted successfully.',
   })
-  async getSkill(
-    @Res({ passthrough: true }) res: Response,
-    @Param('id') id: string,
-  ) {
-    res.status(HttpStatus.OK);
-    return await this.service.findSkill(id);
-  }
-
-  @Put('skills/:id')
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'About skill updated successfully.',
-  })
-  @ApiBody({
-    description: 'To update About skill by id',
-    type: SkillRequest,
-  })
-  async putSkill(
+  async delete(
     @Res() res: Response,
     @Param('id') id: string,
-    @Body() request: SkillRequest,
-  ) {
-    await this.service.updateSkill(id, request);
-    return res.status(HttpStatus.OK).send('About skill updated successfully.');
-  }
-
-  @Delete('skills/:id')
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'About skill deleted successfully.',
-  })
-  async deleteSkill(
-    @Res() res: Response,
-    @Param('id') id: string,
-  ) {
-    await this.service.deleteSkill(id);
-    return res.status(HttpStatus.OK).send('About skill deleted successfully.');
+  ): Promise<Response> {
+    await this.service.delete(id);
+    return res.status(HttpStatus.OK).send('About deleted successfully.');
   }
 }
