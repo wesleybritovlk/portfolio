@@ -3,10 +3,10 @@ import { ContentModule } from '../content/content.module';
 
 export const databaseAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory: () => ({
-    type: 'mongodb',
-    url: process.env.DATABASE_URL,
-    entities: ContentModule.entitiesDatabase,
+    type: 'postgres',
+    url: process.env.DB_URL,
     synchronize: true,
     logging: true,
+    autoLoadEntities: true,
   }),
 };

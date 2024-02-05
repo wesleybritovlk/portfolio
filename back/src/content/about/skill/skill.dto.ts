@@ -1,61 +1,60 @@
+import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsUrl, MaxLength, MinLength } from 'class-validator';
 
-export class HomeImageRequest {
+export class SkillRequest {
   @IsNotEmpty()
-  @IsUrl()
-  @ApiProperty({
-    name: 'url',
-    required: true,
-    example: 'https://www.example.com/image.jpg',
-    format: 'uri',
-  })
-  url: string;
-
-  @IsNotEmpty()
+  @MaxLength(50)
   @IsString()
-  @MinLength(3)
-  @MaxLength(150)
+  @ApiProperty({
+    name: 'tech_name',
+    required: true,
+    maximum: 50,
+    type: 'string',
+  })
+  tech_name: string;
+
+  @IsNotEmpty()
+  @MaxLength(100)
+  @IsString()
   @ApiProperty({
     name: 'alt_en',
     required: true,
-    minimum: 3,
-    maximum: 150,
+    maximum: 100,
     type: 'string',
   })
   alt_en: string;
 
   @IsNotEmpty()
+  @MaxLength(100)
   @IsString()
-  @MinLength(3)
-  @MaxLength(150)
   @ApiProperty({
     name: 'alt_pt',
     required: true,
-    minimum: 3,
-    maximum: 150,
+    maximum: 100,
     type: 'string',
   })
   alt_pt: string;
 }
 
-export class HomeImageResponse {
+export class SkillResponse {
   @ApiProperty({
     name: 'id',
     format: 'uuid',
   })
   id: string;
+
   @ApiProperty({
-    name: 'url',
-    example: 'https://www.example.com/image.jpg',
-    format: 'uri',
+    name: 'tech_name',
+    type: 'string',
   })
-  url: string;
+  tech_name: string;
+
   @ApiProperty({
     name: 'alt_en',
     type: 'string',
   })
   alt_en: string;
+
   @ApiProperty({
     name: 'alt_pt',
     type: 'string',

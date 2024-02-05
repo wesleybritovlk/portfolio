@@ -1,62 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Content } from '../content';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CertificateRequest, CertificateResponse } from './certificate.dto';
 import { CertificateMapper } from './certificate.mapper';
+import { Certificate } from './certificate';
+import { CommonService } from '../../common/common.service';
 
-export abstract class CertificateService {
-
-  abstract create(request: CertificateRequest): Promise<Content>;
-
-  abstract find(): Promise<CertificateResponse[]>;
-
-  abstract findOne(id: string): Promise<CertificateResponse>;
-
-  abstract update(id: string, request: CertificateRequest): Promise<Content>;
-
-  abstract delete(id: string): Promise<Content>;
+export abstract class CertificateService
+  extends CommonService<Certificate, CertificateRequest, CertificateResponse> {
 }
 
 @Injectable()
 export class CertificateServiceImpl implements CertificateService {
   constructor(
     private mapper: CertificateMapper,
-    @InjectRepository(Content) private repository: Repository<Content>,
+    @InjectRepository(Certificate) private repository: Repository<Certificate>,
   ) {
   }
 
-  findContent = (): Promise<Content> => this.repository.findOne({});
-
-  async create(request: CertificateRequest): Promise<Content> {
-    let content = await this.findContent();
-    if (!content.certificates) content.certificates = [];
-    content.certificates.push(this.mapper.toModel(request));
-    return this.repository.save(content);
+  async create(request: CertificateRequest): Promise<Certificate> {
+    let model = this.mapper.toModel(request);
+    return this.repository.save(model);
   }
 
   async find(): Promise<CertificateResponse[]> {
-    let content = await this.findContent();
-    if (!content.certificates) content.certificates = [];
-    return content.certificates.map(this.mapper.toResponse);
+    let models = await this.repository.find();
+    return models.map(this.mapper.toResponse.bind(this.mapper));
   }
 
   async findOne(id: string): Promise<CertificateResponse> {
-    let content = await this.findContent();
-    let certificate = content.certificates.find(cert => cert.id === id);
-    return this.mapper.toResponse(certificate);
+    let model = await this.repository.findOneBy({ id: id });
+    return this.mapper.toResponse(model);
   }
 
-  async update(id: string, request: CertificateRequest): Promise<Content> {
-    let content = await this.findContent();
-    content.certificates = content.certificates.map(cert =>
-      cert.id === id ? this.mapper.toModelUpdate(cert, request) : cert);
-    return this.repository.save(content);
+  async update(id: string, request: CertificateRequest): Promise<UpdateResult> {
+    let model = this.mapper.toModel(request);
+    return this.repository.update(id, model);
   }
 
-  async delete(id: string): Promise<Content> {
-    let content = await this.findContent();
-    content.certificates = content.certificates.filter(cert => cert.id !== id);
-    return this.repository.save(content);
+  async delete(id: string): Promise<DeleteResult> {
+    return await this.repository.delete(id);
   }
 }
