@@ -31,7 +31,10 @@ import {FormService} from '../../../services/form.service'
         <textarea class="field-textarea" formControlName="message"></textarea>
       </div>
       <div class="form-button">
-        <app-state-button [isValid]="formEmail.valid" [send]="send"/>
+        <app-state-button
+          [isValid]="formEmail.valid"
+          [isTouched]="setRequiredTouched(formEmail, 'firstName', 'email')"
+          [send]="send"/>
         <app-resume-button [small]="true"/>
       </div>
     </form>`,
@@ -124,7 +127,13 @@ export class FormComponent {
     setTimeout(resolve, 2000)
   })
 
-  setRequired = (formEmail: FormGroup, formControlName: string) => formEmail.get(formControlName)?.invalid &&
-    (formEmail.get(formControlName)?.dirty || formEmail.get(formControlName)?.touched)
+  setRequired = (formEmail: FormGroup, controlName: string) => formEmail.get(controlName)?.invalid &&
+    (formEmail.get(controlName)?.dirty || formEmail.get(controlName)?.touched)
 
+  setRequiredTouched(formEmail: FormGroup, ...controlNames: string[]) {
+    let isTouched: boolean | undefined = false
+    controlNames.find(controlName => isTouched =
+      formEmail.get(controlName)?.dirty || formEmail.get(controlName)?.touched)
+    return isTouched;
+  }
 }
