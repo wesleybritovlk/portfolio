@@ -19,7 +19,7 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
 
 #### Libraries:
 
-    NGX-Translate, Swiper@8, AOS, Remix Icon, Flag-Icons, DEVICON, Github-Buttons
+    NGX-Translate, Swiper@8, AOS, Remix Icon, Flag-Icons, DEVICON
 
 #### Color Reference:
 

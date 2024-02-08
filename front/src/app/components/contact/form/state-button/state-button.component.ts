@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core'
+import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core'
 import {FormService} from '../../../../services/form.service'
 import {Subscription} from 'rxjs'
 
@@ -15,7 +15,7 @@ import {Subscription} from 'rxjs'
          class="btn-icon ri-close-line"></i>
       <i *ngIf="isLoading"
          class="btn-icon ri-loader-4-line"
-         [class.--loading]="isLoading"></i>
+         [class.--loading]="isLoading && isValid"></i>
       <i *ngIf="send"
          class="btn-icon ri-check-line"></i>
     </button>
@@ -47,7 +47,7 @@ export class StateButtonComponent implements OnInit, OnDestroy {
   @Input() isValid?: boolean = false
   @Input() isTouched?: boolean = false
   @Input() send: boolean = false
-  isLoading: boolean = false
+  isLoading: boolean = true
   loaderSub?: Subscription
 
   constructor(
@@ -56,6 +56,7 @@ export class StateButtonComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLoading = false
     this.loaderSub = this.formService.loader.subscribe({
       next: data => this.isLoading = data,
       error: error => console.error(error)

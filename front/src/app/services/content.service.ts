@@ -6,7 +6,7 @@ import {environment} from '../../environments/environment'
 
 @Injectable()
 export class ContentService {
-  contentUrl = `${environment.apiUrl}`
+  contentUrl = `${environment.API_URL}`
 
   constructor(private http: HttpClient) {
   }

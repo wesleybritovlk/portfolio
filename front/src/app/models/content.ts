@@ -52,12 +52,12 @@ export interface Certificate {
 }
 
 export interface Contact {
-  id: string
+  id?: string
   mobile: string
   wa_en: string
   wa_pt: string
   resume_url: string
-  github: GitHub
+  github?: GitHub
 }
 
 export interface GitHub {
