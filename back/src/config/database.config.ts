@@ -4,7 +4,7 @@ export const databaseAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory: () => ({
     type: "postgres",
     url: process.env.DB_URL,
-    synchronize: true,
+    synchronize: false,
     logging: true,
     autoLoadEntities: true
   })
