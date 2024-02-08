@@ -24,10 +24,13 @@
 
   &:disabled {
     cursor: not-allowed;
-    background-color: #C800007F;
     color: var(--text-color);
     border-color: var(--text-color);
     transition: .3s ease-in-out;
+  }
+
+  &.--invalid:disabled {
+    background-color: #C800007F;
   }
 
   &.--send:disabled {

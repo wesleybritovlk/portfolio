@@ -1,35 +1,27 @@
 import { CertificateRequest, CertificateResponse } from './certificate.dto';
 import { Certificate } from './certificate';
+import { CommonMapper } from '../../common/common.mapper';
 
-export class CertificateMapper {
-  toModel = (request: CertificateRequest): Certificate =>
-    new Certificate(
-      undefined,
-      request.title,
-      request.web_url,
-      request.image_url,
-      request.desc_en,
-      request.desc_pt,
-    );
+export class CertificateMapper
+  implements CommonMapper<Certificate, CertificateRequest, CertificateResponse> {
+  toModel(request: CertificateRequest): Certificate {
+    let certificate = new Certificate();
+    certificate.title = request.title;
+    certificate.webURL = request.web_url;
+    certificate.imageURL = request.image_url;
+    certificate.descEN = request.desc_en;
+    certificate.descPT = request.desc_pt;
+    return certificate;
+  }
 
-  toModelUpdate = (model: Certificate, request: CertificateRequest): Certificate =>
-    new Certificate(
-      model.id,
-      request.title,
-      request.web_url,
-      request.image_url,
-      request.desc_en,
-      request.desc_pt,
-      model.createdAt,
-    );
-
-  toResponse = (model: Certificate): CertificateResponse =>
-    model ? new CertificateResponse(
-      model.id,
-      model.title,
-      model.webURL,
-      model.imageURL,
-      model.descEN,
-      model.descPT,
-    ) : undefined;
+  toResponse(model: Certificate): CertificateResponse {
+    let response = new CertificateResponse();
+    response.id = model.id;
+    response.title = model.title;
+    response.web_url = model.webURL;
+    response.image_url = model.imageURL;
+    response.desc_en = model.descEN;
+    response.desc_pt = model.descPT;
+    return response;
+  }
 }

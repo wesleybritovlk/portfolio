@@ -1,76 +1,46 @@
+import { CommonService } from '../../common/common.service';
+import { About } from './about';
+import { AboutRequest, AboutResponse } from './about.dto';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { AboutMapper } from './about.mapper';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Content } from '../content';
-import { AboutRequest, AboutResponse, SkillRequest, SkillResponse } from './about.dto';
-import { AboutMapper } from './about.mapper';
 
-export abstract class AboutService {
-  abstract save(request: AboutRequest): Promise<Content>
-
-  abstract find(): Promise<AboutResponse>
-
-  abstract update(request: AboutRequest): Promise<Content>
-
-  abstract createSkill(request: SkillRequest): Promise<Content>
-
-  abstract findSkill(id: string): Promise<SkillResponse>
-
-  abstract updateSkill(id: string, request: SkillRequest): Promise<Content>
-
-  abstract deleteSkill(id: string): Promise<Content>
+export abstract class AboutService
+  extends CommonService<About, AboutRequest, AboutResponse> {
 }
 
 @Injectable()
 export class AboutServiceImpl implements AboutService {
   constructor(
     private mapper: AboutMapper,
-    @InjectRepository(Content) private repository: Repository<Content>,
+    @InjectRepository(About) private repository: Repository<About>,
   ) {
   }
 
-  findContent = (): Promise<Content> => this.repository.findOne({});
-
-  async save(request: AboutRequest): Promise<Content> {
-    let content = await this.findContent();
-    content.about = this.mapper.toModel(request);
-    return this.repository.save(content);
+  async create(request: AboutRequest): Promise<About> {
+    let model = this.mapper.toModel(request);
+    return this.repository.save(model);
   }
 
-  async find(): Promise<AboutResponse> {
-    let content = await this.findContent();
-    return this.mapper.toResponse(content.about);
+  async find(): Promise<AboutResponse[]> {
+    let models = await this.repository.find(
+      { relations: { skills: true } });
+    return models.map(this.mapper.toResponse.bind(this.mapper));
   }
 
-  async update(request: AboutRequest): Promise<Content> {
-    let content = await this.findContent();
-    content.about = this.mapper.toModelUpdate(content.about, request);
-    return this.repository.save(content);
+  async findOne(id: string): Promise<AboutResponse> {
+    let model = await this.repository.findOne(
+      { relations: { skills: true }, where: { id: id } });
+    return this.mapper.toResponse(model);
   }
 
-  async createSkill(request: SkillRequest): Promise<Content> {
-    let content = await this.findContent();
-    if (!content.about.skillls) content.about.skillls = [];
-    content.about.skillls.push(this.mapper.toModelSkill(request));
-    return this.repository.save(content);
+  async update(id: string, request: AboutRequest): Promise<UpdateResult> {
+    let model = this.mapper.toModel(request);
+    return await this.repository.update(id, model);
   }
 
-  async findSkill(id: string): Promise<SkillResponse> {
-    let content = await this.findContent();
-    let skill = content.about.skillls.find(skill => skill.id === id);
-    return this.mapper.toResponseSkill(skill);
-  }
-
-  async updateSkill(id: string, request: SkillRequest): Promise<Content> {
-    let content = await this.findContent();
-    content.about.skillls = content.about.skillls.map(skill =>
-      skill.id === id ? this.mapper.toModelUpdateSkill(skill, request) : skill);
-    return this.repository.save(content);
-  }
-
-  async deleteSkill(id: string): Promise<Content> {
-    let content = await this.findContent();
-    content.about.skillls = content.about.skillls.filter(skill => skill.id !== id);
-    return this.repository.save(content);
+  async delete(id: string): Promise<DeleteResult> {
+    return await this.repository.delete(id);
   }
 }

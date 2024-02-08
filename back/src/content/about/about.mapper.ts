@@ -1,50 +1,30 @@
-import { About, Skill } from './about';
-import { AboutRequest, AboutResponse, SkillRequest, SkillResponse } from './about.dto';
+import { CommonMapper } from '../../common/common.mapper';
+import { About } from './about';
+import { AboutRequest, AboutResponse } from './about.dto';
+import { SkillResponse } from './skill/skill.dto';
 
-export class AboutMapper {
-  toModel = (request: AboutRequest): About =>
-    new About(
-      request.desc_en,
-      request.desc_pt,
-      [],
-    );
+export class AboutMapper
+  implements CommonMapper<About, AboutRequest, AboutResponse> {
+  toModel(request: AboutRequest): About {
+    let about = new About();
+    about.descEN = request.desc_en;
+    about.descPT = request.desc_pt;
+    return about;
+  }
 
-  toModelUpdate = (model: About, request: AboutRequest): About =>
-    new About(
-      request.desc_en,
-      request.desc_pt,
-      model.skillls,
-    );
-
-  toResponse = (model: About): AboutResponse =>
-    model ? new AboutResponse(
-      model.descEN,
-      model.descPT,
-      model.skillls ? model.skillls.map(this.toResponseSkill) : [],
-    ) : undefined;
-
-  toModelSkill = (request: SkillRequest): Skill =>
-    new Skill(
-      undefined,
-      request.tech_name,
-      request.alt_en,
-      request.alt_pt,
-    );
-
-  toModelUpdateSkill = (model: Skill, request: SkillRequest): Skill =>
-    new Skill(
-      model.id,
-      request.tech_name,
-      request.alt_en,
-      request.alt_pt,
-      model.createdAt,
-    );
-
-  toResponseSkill = (model: Skill): SkillResponse =>
-    model ? new SkillResponse(
-      model.id,
-      model.techName,
-      model.altEN,
-      model.altPT,
-    ) : undefined;
+  toResponse(model: About): AboutResponse {
+    let response = new AboutResponse();
+    response.id = model.id;
+    response.desc_en = model.descEN;
+    response.desc_pt = model.descPT;
+    response.skills = model.skills.map(skill => {
+      let skillResponse = new SkillResponse();
+      skillResponse.id = skill.id;
+      skillResponse.tech_name = skill.techName;
+      skillResponse.alt_en = skill.altEN;
+      skillResponse.alt_pt = skill.altPT;
+      return skillResponse;
+    });
+    return response;
+  }
 }

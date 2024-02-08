@@ -5,7 +5,7 @@ import { FormService } from './form.service';
 import { FormRequest } from './form-request';
 
 @ApiTags('Email Form Endpoint')
-@Controller('form')
+@Controller('forms')
 export class FormController {
   constructor(@Inject('FormService') private service: FormService) {
   }

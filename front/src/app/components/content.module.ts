@@ -26,6 +26,7 @@ import {GlowButtonComponent} from './glow-button/glow-button.component'
 import {ResumeButtonComponent} from './resume-button/resume-button.component'
 import {StateButtonComponent} from './contact/form/state-button/state-button.component'
 import {ClickOutsideDirective} from '../directives/click-outside.directive'
+import {GithubService} from "../services/github.service";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {ClickOutsideDirective} from '../directives/click-outside.directive'
   providers: [
     ContentService,
     FormService,
+    GithubService,
     {provide: HTTP_INTERCEPTORS, useClass: FormInterceptor, multi: true},
   ],
 })

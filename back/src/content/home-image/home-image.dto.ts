@@ -41,6 +41,11 @@ export class HomeImageRequest {
 
 export class HomeImageResponse {
   @ApiProperty({
+    name: 'id',
+    format: 'uuid',
+  })
+  id: string;
+  @ApiProperty({
     name: 'url',
     example: 'https://www.example.com/image.jpg',
     format: 'uri',
@@ -56,10 +61,4 @@ export class HomeImageResponse {
     type: 'string',
   })
   alt_pt: string;
-
-  constructor(url: string, alt_en: string, alt_pt: string) {
-    this.url = url;
-    this.alt_en = alt_en;
-    this.alt_pt = alt_pt;
-  }
 }

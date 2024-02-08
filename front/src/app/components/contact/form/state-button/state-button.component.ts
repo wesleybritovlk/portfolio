@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core'
+import {AfterViewInit, Component, Input, OnDestroy, OnInit} from '@angular/core'
 import {FormService} from '../../../../services/form.service'
 import {Subscription} from 'rxjs'
 
@@ -6,12 +6,18 @@ import {Subscription} from 'rxjs'
   selector: 'app-state-button',
   template: `
     <button class="state-btn" type="submit"
-            [class.--send]="send" [disabled]="!isValid">
-      <i *ngIf="isValid && isLoading" class="btn-icon ri-loader-4-line"
-         [class.--loading]="isLoading"></i>
-      <i *ngIf="isValid && !isLoading" class="btn-icon ri-send-plane-fill"></i>
-      <i *ngIf="!isValid && !send" class="btn-icon ri-close-line"></i>
-      <i *ngIf="!isValid && send" class="btn-icon ri-check-line"></i>
+            [class.--invalid]="isTouched"
+            [class.--send]="send"
+            [disabled]="!isValid    ">
+      <i *ngIf="(!isTouched && !send) || (isValid && !isLoading)"
+         class="btn-icon ri-send-plane-fill"></i>
+      <i *ngIf="isTouched && !isValid"
+         class="btn-icon ri-close-line"></i>
+      <i *ngIf="isLoading"
+         class="btn-icon ri-loader-4-line"
+         [class.--loading]="isLoading && isValid"></i>
+      <i *ngIf="send"
+         class="btn-icon ri-check-line"></i>
     </button>
   `,
   styleUrls: ['./state-button.component.css'],
@@ -38,9 +44,10 @@ import {Subscription} from 'rxjs'
   ]
 })
 export class StateButtonComponent implements OnInit, OnDestroy {
-  @Input() isValid: boolean = false
+  @Input() isValid?: boolean = false
+  @Input() isTouched?: boolean = false
   @Input() send: boolean = false
-  isLoading: boolean = false
+  isLoading: boolean = true
   loaderSub?: Subscription
 
   constructor(
@@ -49,6 +56,7 @@ export class StateButtonComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isLoading = false
     this.loaderSub = this.formService.loader.subscribe({
       next: data => this.isLoading = data,
       error: error => console.error(error)

@@ -124,24 +124,4 @@ export class ProjectResponse {
     type: 'string',
   })
   desc_pt: string;
-
-  constructor(
-    id: string,
-    title: string,
-    repo_url: string,
-    web_url: string,
-    api_url: string,
-    image_url: string,
-    desc_en: string,
-    desc_pt: string,
-  ) {
-    this.id = id;
-    this.title = title;
-    this.repo_url = repo_url;
-    this.web_url = web_url;
-    this.api_url = api_url;
-    this.image_url = image_url;
-    this.desc_en = desc_en;
-    this.desc_pt = desc_pt;
-  }
 }

@@ -1,17 +1,25 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
-import {Content} from '../models/content'
+import {About, Certificate, Contact, HomeImage, Project, Social} from '../models/content'
 import {Observable} from 'rxjs'
 import {environment} from '../../environments/environment'
 
 @Injectable()
 export class ContentService {
-  contentUrl = `${environment.apiUrl}/content`
+  contentUrl = `${environment.API_URL}`
 
   constructor(private http: HttpClient) {
   }
 
-  getContent(): Observable<Content> {
-    return this.http.get<Content>(this.contentUrl)
-  }
+  getHomeImages = (): Observable<HomeImage[]> => this.http.get<HomeImage[]>(this.contentUrl + '/home_images')
+
+  getSocials = (): Observable<Social[]> => this.http.get<Social[]>(this.contentUrl + '/socials');
+
+  getAbouts = (): Observable<About[]> => this.http.get<About[]>(this.contentUrl + '/abouts');
+
+  getProjects = (): Observable<Project[]> => this.http.get<Project[]>(this.contentUrl + '/projects')
+
+  getCertificates = (): Observable<Certificate[]> => this.http.get<Certificate[]>(this.contentUrl + '/certificates')
+
+  getContacts = (): Observable<Contact[]> => this.http.get<Contact[]>(this.contentUrl + '/contacts')
 }

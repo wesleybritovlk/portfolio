@@ -1,12 +1,28 @@
-import { Body, Controller, Delete, Get, HttpStatus, Inject, Param, Post, Put, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Inject,
+  Param,
+  Post,
+  Put,
+  Res,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { ProjectService } from './project.service';
 import { ProjectRequest, ProjectResponse } from './project.dto';
+import { CommonController } from '../../common/common.controller';
+import { CacheInterceptor } from '@nestjs/cache-manager';
+import { CacheKey } from '@nestjs/common/cache';
 
 @ApiTags('Project Endpoint')
 @Controller('projects')
-export class ProjectController {
+export class ProjectController
+  implements CommonController<ProjectRequest, ProjectResponse> {
   constructor(
     @Inject('ProjectService') private service: ProjectService,
   ) {
@@ -30,6 +46,8 @@ export class ProjectController {
   }
 
   @Get()
+  @UseInterceptors(CacheInterceptor)
+  @CacheKey('project_all')
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'To return Project list',
@@ -43,6 +61,8 @@ export class ProjectController {
   }
 
   @Get(':id')
+  @UseInterceptors(CacheInterceptor)
+  @CacheKey('project_id')
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'To return Project by id',

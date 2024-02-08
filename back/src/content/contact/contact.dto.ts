@@ -1,6 +1,6 @@
-import { IsNotEmpty, IsPhoneNumber, IsUrl } from 'class-validator';
+import { IsNotEmpty, IsPhoneNumber, IsString, IsUrl } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { GitHubRequest, GitHubResponse } from './github/github.dto';
+import { GithubRequest, GithubResponse } from './github/github.dto';
 
 export class ContactRequest {
   @IsNotEmpty()
@@ -17,6 +17,24 @@ export class ContactRequest {
   mobile: string;
 
   @IsNotEmpty()
+  @IsString()
+  @ApiProperty({
+    name: 'wa_en',
+    required: true,
+    type: 'string',
+  })
+  wa_en: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({
+    name: 'wa_pt',
+    required: true,
+    type: 'string',
+  })
+  wa_pt: string;
+
+  @IsNotEmpty()
   @IsUrl()
   @ApiProperty({
     name: 'resume_url',
@@ -30,12 +48,18 @@ export class ContactRequest {
   @ApiProperty({
     name: 'github',
     required: true,
-    type: GitHubRequest,
+    type: GithubRequest,
   })
-  github: GitHubRequest;
+  github: GithubRequest;
 }
 
 export class ContactResponse {
+  @ApiProperty({
+    name: 'id',
+    format: 'uuid',
+  })
+  id: string;
+
   @ApiProperty({
     name: 'mobile',
     example: '5500988888888',
@@ -66,20 +90,8 @@ export class ContactResponse {
 
   @ApiProperty({
     name: 'github',
-    type: GitHubResponse,
+    type: GithubResponse,
   })
-  github: GitHubResponse;
-
-  constructor(mobile: string,
-              wa_en: string,
-              wa_pt: string,
-              resume_url: string,
-              github: GitHubResponse) {
-    this.mobile = mobile;
-    this.wa_en = wa_en;
-    this.wa_pt = wa_pt;
-    this.resume_url = resume_url;
-    this.github = github;
-  }
+  github: GithubResponse;
 }
 

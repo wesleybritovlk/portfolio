@@ -1,76 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Content } from '../content';
-import { SocialLinkRequest, SocialLinkResponse, SocialRequest, SocialResponse } from './social.dto';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { SocialRequest, SocialResponse } from './social.dto';
 import { SocialMapper } from './social.mapper';
+import { Social } from './social';
+import { CommonService } from '../../common/common.service';
 
-export abstract class SocialService {
-  abstract save(request: SocialRequest): Promise<Content>
-
-  abstract find(): Promise<SocialResponse>
-
-  abstract update(request: SocialRequest): Promise<Content>
-
-  abstract createLink(request: SocialLinkRequest): Promise<Content>
-
-  abstract findLink(id: string): Promise<SocialLinkResponse>
-
-  abstract updateLink(id: string, request: SocialLinkRequest): Promise<Content>
-
-  abstract deleteLink(id: string): Promise<Content>
+export abstract class SocialService
+  extends CommonService<Social, SocialRequest, SocialResponse> {
 }
 
 @Injectable()
 export class SocialServiceImpl implements SocialService {
   constructor(
     private mapper: SocialMapper,
-    @InjectRepository(Content) private repository: Repository<Content>,
+    @InjectRepository(Social) private repository: Repository<Social>,
   ) {
   }
 
-  findContent = (): Promise<Content> => this.repository.findOne({});
-
-  async save(request: SocialRequest): Promise<Content> {
-    let content = await this.findContent();
-    content.social = this.mapper.toModel(request);
-    return this.repository.save(content);
+  async create(request: SocialRequest): Promise<Social> {
+    let model = this.mapper.toModel(request);
+    return await this.repository.save(model);
   }
 
-  async find(): Promise<SocialResponse> {
-    let content = await this.findContent();
-    return this.mapper.toResponse(content.social);
+  async find(): Promise<SocialResponse[]> {
+    let models = await this.repository.find(
+      { relations: { links: true } });
+    return models.map(this.mapper.toResponse);
   }
 
-  async update(request: SocialRequest): Promise<Content> {
-    let content = await this.findContent();
-    content.social = this.mapper.toModelUpdate(content.social, request);
-    return this.repository.save(content);
+  async findOne(id: string): Promise<SocialResponse> {
+    let model = await this.repository.findOne(
+      { relations: { links: true }, where: { id: id } });
+    return this.mapper.toResponse(model);
   }
 
-  async createLink(request: SocialLinkRequest): Promise<Content> {
-    let content = await this.findContent();
-    if (!content.social.links) content.social.links = [];
-    content.social.links.push(this.mapper.toModelLink(request));
-    return this.repository.save(content);
+  async update(id: string, request: SocialRequest): Promise<UpdateResult> {
+    let model = this.mapper.toModel(request);
+    return await this.repository.update(id, model);
   }
 
-  async findLink(id: string): Promise<SocialLinkResponse> {
-    let content = await this.findContent();
-    let link = content.social.links.find(link => link.id === id);
-    return this.mapper.toResponseLink(link);
-  }
-
-  async updateLink(id: string, request: SocialLinkRequest): Promise<Content> {
-    let content = await this.findContent();
-    content.social.links = content.social.links.map(link =>
-      link.id === id ? this.mapper.toModelUpdateLink(link, request) : link);
-    return this.repository.save(content);
-  }
-
-  async deleteLink(id: string): Promise<Content> {
-    let content = await this.findContent();
-    content.social.links = content.social.links.filter(link => link.id !== id);
-    return this.repository.save(content);
+  async delete(id: string): Promise<DeleteResult> {
+    return await this.repository.delete(id);
   }
 }

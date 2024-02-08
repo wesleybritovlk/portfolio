@@ -22,8 +22,8 @@ export class ResumeButtonComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.resumeSub = this.contentService.getContent().subscribe({
-      next: data => this.resume = data.contact.resume_url,
+    this.resumeSub = this.contentService.getContacts().subscribe({
+      next: data => this.resume = data[0].resume_url,
       error: err => console.error(err)
     })
   }

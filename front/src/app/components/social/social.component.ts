@@ -84,8 +84,8 @@ export class SocialComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.socialSub = this.contentService.getContent().subscribe({
-      next: data => this.social = data.social,
+    this.socialSub = this.contentService.getSocials().subscribe({
+      next: data => this.social = data[0],
       error: error => console.error(error)
     })
   }

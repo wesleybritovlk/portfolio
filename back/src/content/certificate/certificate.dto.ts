@@ -92,20 +92,4 @@ export class CertificateResponse {
     type: 'string',
   })
   desc_pt: string;
-
-  constructor(
-    id: string,
-    title: string,
-    web_url: string,
-    image_url: string,
-    desc_en: string,
-    desc_pt: string,
-  ) {
-    this.id = id;
-    this.title = title;
-    this.web_url = web_url;
-    this.image_url = image_url;
-    this.desc_en = desc_en;
-    this.desc_pt = desc_pt;
-  }
 }

@@ -1,7 +1,9 @@
-import { Column } from 'typeorm';
-import { GitHub } from './github/github';
+import { Column, Entity } from 'typeorm';
+import { Github } from './github/github';
+import { CommonEntity } from '../../common/common.entity';
 
-export class Contact {
+@Entity()
+export class Contact extends CommonEntity {
   @Column({ nullable: false })
   mobile: string;
   @Column({ nullable: false })
@@ -10,14 +12,6 @@ export class Contact {
   waPT: string;
   @Column({ nullable: false })
   resumeURL: string;
-  @Column((type) => GitHub)
-  github: GitHub;
-
-  constructor(mobile: string, waEN: string, waPT: string, resumeURL: string, github: GitHub) {
-    this.mobile = mobile;
-    this.waEN = waEN;
-    this.waPT = waPT;
-    this.resumeURL = resumeURL;
-    this.github = github;
-  }
+  @Column(() => Github)
+  github: Github;
 }

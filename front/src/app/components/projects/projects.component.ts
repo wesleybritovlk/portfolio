@@ -77,7 +77,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   protected readonly flexContainer = flexContainer
   projects: Project[] = []
   certificates: Certificate[] = []
-  projectCertSub?: Subscription
+  projectSub?: Subscription
+  certificateSub?: Subscription
 
   configSwiper: SwiperOptions = {
     virtual: true,
@@ -106,16 +107,18 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.projectCertSub = this.contentService.getContent().subscribe({
-      next: data => {
-        this.projects = data.projects
-        this.certificates = data.certificates
-      },
+    this.projectSub = this.contentService.getProjects().subscribe({
+      next: data => this.projects = data,
       error: error => console.error(error)
+    })
+    this.certificateSub = this.contentService.getCertificates().subscribe({
+      next: data => this.certificates = data,
+      error: err => console.error(err)
     })
   }
 
   ngOnDestroy(): void {
-    this.projectCertSub?.unsubscribe()
+    this.projectSub?.unsubscribe()
+    this.certificateSub?.unsubscribe()
   }
 }

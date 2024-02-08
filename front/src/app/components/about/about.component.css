@@ -10,6 +10,8 @@
   color: var(--text-color);
   padding: 10px;
   font-size: var(--text-size-about);
+  text-align: justify;
+  text-justify: distribute;
 }
 
 .skills-container {

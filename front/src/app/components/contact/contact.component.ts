@@ -13,7 +13,7 @@ import {Subscription} from 'rxjs'
         <div class="contact-number">
           <a target="_blank" [href]="setUrlByLang(contact)">
             <i class="ri-whatsapp-fill"></i>
-            {{ contact?.mobile ?? '5500988888888' | mask: '+00 (00) 00000-0000' }}
+            {{ contact.mobile | mask: '+00 (00) 00000-0000' }}
           </a>
         </div>
         <div class="contact-or">{{ 'contact_or' | translate }}</div>
@@ -53,20 +53,20 @@ import {Subscription} from 'rxjs'
 })
 export class ContactComponent implements OnInit, OnDestroy {
   protected readonly flexContainer = flexContainer
-  contact?: Contact
+  contact: Contact = {mobile: '5500988888888', wa_en: '', wa_pt: '', resume_url: ''}
   contactSub?: Subscription
 
-  setUrlByLang(contact?: Contact) {
+  setUrlByLang(contact: Contact) {
     let lang = document.documentElement.lang === 'en'
-    return lang ? contact?.wa_en ?? '' : contact?.wa_pt ?? ''
+    return lang ? contact.wa_en : contact.wa_pt
   }
 
   constructor(private contentService: ContentService) {
   }
 
   ngOnInit(): void {
-    this.contactSub = this.contentService.getContent().subscribe({
-      next: (content) => this.contact = content.contact,
+    this.contactSub = this.contentService.getContacts().subscribe({
+      next: data => this.contact = data[0],
       error: error => console.error(error)
     })
   }
