@@ -1,7 +1,7 @@
 @media (min-width: 600px) {
   :root {
     --text-size-smaller: .7rem;
-    --text-size-about: 1.05rem;
+    --text-size-about: 1rem;
     --text-size: 1rem;
     --text-size-large: 1.1rem;
     --title-size-smaller: 1.2rem;

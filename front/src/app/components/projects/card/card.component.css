@@ -44,6 +44,8 @@
     .modal-desc {
       width: 90%;
       font-size: var(--text-size-smaller);
+      text-align: justify;
+      text-justify: distribute;
     }
   }
 
@@ -72,6 +74,8 @@
 
     .cert-desc {
       font-size: var(--text-size-smaller);
+      text-align: justify;
+      text-justify: distribute;
     }
 
     .cert-link {
