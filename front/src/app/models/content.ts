@@ -64,4 +64,5 @@ export interface GitHub {
   username: string
   repo_name: string
   url: string
+  token: string
 }
