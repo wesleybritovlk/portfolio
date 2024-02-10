@@ -40,4 +40,10 @@ export class GithubResponse {
     format: 'uri',
   })
   url: string;
+
+  @ApiProperty({
+    name: 'token',
+    format: 'uuid',
+  })
+  token: string;
 }

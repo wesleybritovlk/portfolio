@@ -5,6 +5,6 @@ export const cacheAsyncConfig: CacheModuleAsyncOptions = {
   useFactory: async () => ({
     store: redisStore,
     url: process.env.CACHE_URL,
-    ttl: 300000,
+    ttl: 600,
   }),
 };
