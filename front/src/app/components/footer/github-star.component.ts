@@ -83,7 +83,7 @@ export class GithubStarComponent implements OnInit, OnDestroy {
     this.contactSub = this.contentService.getContacts().subscribe({
       next: data => {
         this.github = data[0].github
-        if (this.github) this.getGitHubStar(github);
+        if (this.github) this.getGitHubStar(this.github);
       },
       error: error => console.error(error)
     })
