@@ -46,6 +46,8 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
         - [X] HeroText
         - [X] HeroImage:
             - [X] ProfileImageComponent
+    - [X] ResumeButtonComponent:
+      - [X] GlowButtonComponent
     - [X] SocialComponent:
         - [X] SocialLinks
         - [X] SocialEmail
@@ -58,6 +60,7 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
     - [X] ContactComponent:
         - [X] ContactInfo
         - [X] FormComponent
+          - [X] StateButtonComponent
     - [X] ReturnButtonComponent
     - [X] FooterComponent
         - [X] Copyuser
@@ -66,6 +69,7 @@ A SPA front-end made with the Angular framework version 16, chosen by best compa
 #### Images:
 
 <p align="center">
+<img src="./docs/portfolio-wesleybritovlk.png" alt="current portfolio" height="500"/>
 <img src="./docs/plan/web-desktop-plan.svg" alt="web desktop plan" height="500"/>
 <img src="./docs/plan/web-mobile-plan.svg" alt="drawing" height="500"/>
 </p>
@@ -78,7 +82,7 @@ This is an API developed in NestJS with two main endpoints: 'Page Content' (GET 
 
 #### Tech Stack:
 
-    NestJS@10, PostgreSQL, Redis
+    NestJS@10, PostgreSQL, Redis, Docker
 
 #### Libraries:
 
@@ -145,6 +149,7 @@ classDiagram
         String username
         String repoName
         String url
+        String token
     }
 
     note for Form "POST method only"
@@ -217,7 +222,8 @@ classDiagram
     "github": {
       "username": "",
       "repo_name": "",
-      "url": ""
+      "url": "",
+      "token": ""
     }
   },
   "form": {

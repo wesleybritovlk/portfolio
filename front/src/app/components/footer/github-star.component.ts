@@ -83,14 +83,19 @@ export class GithubStarComponent implements OnInit, OnDestroy {
     this.contactSub = this.contentService.getContacts().subscribe({
       next: data => {
         this.github = data[0].github
-        if (this.github) this.githubSub = this.githubService
-          .getStarsByRepo(this.github.username, this.github.repo_name).subscribe({
-            next: data => this.count = data.length,
-            error: err => console.error(err)
-          })
+        if (this.github) this.getGitHubStar();
       },
       error: error => console.error(error)
     })
+  }
+
+  getGitHubStar(github: GitHub) {
+    let path = github.username + '/' + github.repo_name
+    this.githubSub = this.githubService.getStarsByRepo(path, github.token)
+      .subscribe({
+        next: data => this.count = data.length,
+        error: err => console.error(err)
+      })
   }
 
   ngOnDestroy(): void {

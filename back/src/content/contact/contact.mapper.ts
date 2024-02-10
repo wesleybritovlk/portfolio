@@ -33,6 +33,7 @@ export class ContactMapper
       githubResponse.username = model.github.username;
       githubResponse.repo_name = model.github.repoName;
       githubResponse.url = model.github.url;
+      githubResponse.token = process.env.GITHUB_TOKEN;
     }
     response.github = githubResponse;
     return response;
