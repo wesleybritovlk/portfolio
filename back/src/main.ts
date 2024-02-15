@@ -8,8 +8,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('Portfolio API')
-    .setVersion('1.0')
-    .addTag('Portfolio')
+    .setVersion(require('../package.json').version)
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
